@@ -1,0 +1,50 @@
+
+ROM used:   590/32768 (2%)
+            590/32768 (2%) including unused fragments
+
+            0.2 Average locations per line
+            2.2 Average locations per statement
+
+RAM used:   9/1536 (1%) at main() level
+            24/1536 (2%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   41    12   4  sonde2.c
+    6     0   0  sonde2.h
+  785     0   0  ..\..\..\..\Program Files (x86)\PICC\Devices\18F458.h
+ 2227   258  96  ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
+----- -----
+ 3059   270 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     58   5    4             @SFTOI
+0     56   5    2             @ITOF
+0    244  21   11             @MULFF
+0    186  16    5    422  4.4  MAIN
+0     42   4    3             @DIV88
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               1
+    Statements              270
+    Comments                410
+    Volume (V)              433
+    Difficulty (D)          3.9
+    Effort to implement (E) 1678
+    Time to implement (T)   2 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    46
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-07FFE   586  32178  
+
+
+
