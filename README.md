@@ -1,5 +1,5 @@
 # DTE ( Digital Temperature Equipment )
-EPHEC - 2016/17 - T207 Électronique digitale, traitement de signal
+EPHEC - 2016/17 - T207 Électronique digitale, traitement de signal, Groupe 5
 
 ## Finalité
 * Elaborer une méthodologie de travail et planifier les activités en réalisant un projet permettant l’**interfaçage du système informatique avec un environnement extérieur**
