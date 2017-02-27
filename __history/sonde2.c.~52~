@@ -32,8 +32,6 @@ void bitsToBCD(int value) {
    output_low(TENS_DISPLAY);
    output_high(UNITY_DISPLAY);
    
-   
-   
    delay_ms(10);
 }
 
@@ -70,7 +68,7 @@ void main()
       // And convert it to a range from 0 to 100 (°C)
       // 0.48 => (5 / 1023) * 100
       temperature = read_adc() * CONV_CST;
-      printf("%d",temperature);
+      printf(temperature);   
       // Check temp level
       checkLed(temperature);
 
