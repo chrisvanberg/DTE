@@ -1,0 +1,40 @@
+[PROJECT]
+Target=D:\Documents\Cours\Electronique\Projet\sonde\sonde.hex
+Processor_Text=PIC18F458
+CCSVerions=5.065d
+Compiler=PCH
+[Target Data]
+FileList=sonde.c
+[Directories]
+Include=
+[D:\Documents\Cours\Electronique\Projet\sonde\sonde]
+Type=4
+[mru-list]
+1=sonde.c
+[Units]
+Count=1
+1=sonde (main)
+
+[ProjectLog]
+Days=2
+D1=11-02-2017
+D1_L=4
+D1_L1=[51769]Project Opened.
+D1_L2=[51774]Started Editing.
+D1_L3=[51981]Stopped Editing.
+TotalEdit=4
+TotalDebug=0
+D1_E=4
+D1_D=0
+D1_L4=[51981]Project Closed.
+D2=14-02-2017
+D2_L=2
+D2_L1=[36586]Project Opened.
+D2_L2=[38803]Project Closed.
+
+[Opened Files]
+1=sonde.c
+t1=1
+Count=2
+2=sonde.h
+t2=1
