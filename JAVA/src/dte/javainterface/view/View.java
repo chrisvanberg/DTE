@@ -5,12 +5,7 @@ import dte.javainterface.model.Model;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- *
- * @author <a href="mailto:contact@chrisv.be">Christophe Van Waesberghe
- * (contact@chrisv.be)</a>
- */
-public abstract class View implements Observer {
+public abstract class View extends javax.swing.JFrame implements Observer {
 
     Model model;
     Controller controller;
@@ -18,6 +13,10 @@ public abstract class View implements Observer {
     public View(Controller controller, Model model) {
         this.model = model;
         this.controller = controller;
+    }
+    
+    public View(){
+        
     }
 
     /**

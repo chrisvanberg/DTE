@@ -5,7 +5,7 @@ import dte.javainterface.model.Model;
 import dte.javainterface.view.CliView;
 import dte.javainterface.view.GuiView;
 
-public class Main {
+public class DTE {
 
     private Model model;
     private Controller guiController;
@@ -16,8 +16,8 @@ public class Main {
     /**
      * Setup the Model, the controller and the view.
      */
-    public void Main() {
-
+    public void DTE() {
+        
         model = new Model();
         guiController = new Controller(model);
         cliController = new Controller(model);
@@ -30,7 +30,9 @@ public class Main {
 
         gui.addObservable(model);
         cli.addObservable(model);
-        //gui.setVisible(true);
+
+        cli.draw();
+        gui.setVisible(true);
 
     }
 
@@ -41,8 +43,7 @@ public class Main {
      * settings)
      */
     public static void main(String[] args) {
-
-        javax.swing.SwingUtilities.invokeLater(Main::new);
+        javax.swing.SwingUtilities.invokeLater(DTE::new);
 
     }
 
