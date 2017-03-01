@@ -59,15 +59,4 @@ public class ControllerTest extends TestCase {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of startGame method, of class Controller.
-     */
-    public void testStartGame() throws Exception {
-        System.out.println("startGame");
-        Controller instance = null;
-        instance.startGame();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
 }
