@@ -26,7 +26,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package dte.javainterface.main;
+package dte.javainterface;
 
 import dte.javainterface.controller.Controller;
 import dte.javainterface.model.Model;
