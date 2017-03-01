@@ -12,6 +12,7 @@ public class CliView extends View {
 
     @Override
     public void update(Observable o, Object arg) {
+        
         draw();
     }
     

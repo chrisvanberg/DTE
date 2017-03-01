@@ -17,7 +17,7 @@ public class DTE {
      * Setup the Model, the controller and the view.
      */
     public void DTE() {
-        
+        System.out.println("Hello");
         model = new Model();
         guiController = new Controller(model);
         cliController = new Controller(model);
@@ -43,6 +43,7 @@ public class DTE {
      * settings)
      */
     public static void main(String[] args) {
+        
         javax.swing.SwingUtilities.invokeLater(DTE::new);
 
     }
