@@ -1,6 +1,7 @@
 #Custom
 /Logo
 .DS_Store
+nblibraries.properties
 #!Custom
 
 *.class
@@ -9,7 +10,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
