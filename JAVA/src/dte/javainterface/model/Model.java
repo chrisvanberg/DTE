@@ -34,5 +34,26 @@ import java.util.Observable;
  * Model of the App, contain all the data.a
  */
 public class Model extends Observable {
-
+    private int currentTemperature;
+    private int alertTemperature;
+    private int alertLevel;
+    
+    /**
+     * Model's constructor without parametters
+     */
+    public Model(){
+        
+    }
+    
+    /**
+     * Full Model constructor
+     * @param currentTemperature Must be an int and be the current temperature given by the sensors
+     * @param alertTemperature Must be an int and be the temperature who trigger the alert
+     * @param alertLevel Must be an int>0 who represent the current lever of alert (0:Cooling,1:OK,2:heating,3:alert) 
+     */
+    public Model(int currentTemperature, int maxTemperature, int alertLevel){
+        this.currentTemperature=currentTemperature;
+        this.alertTemperature=maxTemperature;
+        this.alertLevel=alertLevel;
+    }
 }
