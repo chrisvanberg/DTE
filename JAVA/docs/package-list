@@ -1,1 +1,4 @@
-dte.javainterface.main
+dte.javainterface
+dte.javainterface.controller
+dte.javainterface.model
+dte.javainterface.view
