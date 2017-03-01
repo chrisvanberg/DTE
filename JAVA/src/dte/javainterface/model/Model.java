@@ -30,6 +30,9 @@ package dte.javainterface.model;
 
 import java.util.Observable;
 
+/**
+ * Model of the App, contain all the data.a
+ */
 public class Model extends Observable {
 
 }

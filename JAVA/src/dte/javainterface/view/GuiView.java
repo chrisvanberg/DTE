@@ -32,20 +32,23 @@ import dte.javainterface.controller.Controller;
 import dte.javainterface.model.Model;
 import java.util.Observable;
 
+/**
+ * Graphical interface of the App
+ */
 public class GuiView extends View {
 
     /**
-     * Creates new form DTEGuiView
+     * GuiView simple constructor. Init the GUI
      */
     public GuiView() {
         initComponents();
     }
 
     /**
-     * Creates new form GuiView
+     * GuiView's constructor with a Controller and a Model
      *
-     * @param controller The controller
-     * @param model The model
+     * @param controller Controller of this view
+     * @param model Model of this view
      */
     public GuiView(Controller controller, Model model) {
         super(controller, model);
@@ -53,6 +56,12 @@ public class GuiView extends View {
 
     }
 
+    /**
+     * Update the view. Triggered when the Model change
+     *
+     * @param o Observable Object
+     * @param arg Object the argument
+     */
     @Override
     public void update(Observable o, Object arg) {
 
@@ -168,42 +177,6 @@ public class GuiView extends View {
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GuiView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GuiView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GuiView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GuiView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GuiView().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;

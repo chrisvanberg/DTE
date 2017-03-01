@@ -33,6 +33,9 @@ import dte.javainterface.model.Model;
 import dte.javainterface.view.CliView;
 import dte.javainterface.view.GuiView;
 
+/**
+ * DTE Main class, initialize and start both CLI and GUI view
+ */
 public class DTE {
 
     private final Model model;
@@ -42,7 +45,7 @@ public class DTE {
     private final GuiView gui;
 
     /**
-     * Setup the Model, the controller and the view.
+     * Setup the Model, the controller, the view and start the app.
      */
     public DTE() {
         model = new Model();
@@ -64,7 +67,7 @@ public class DTE {
     }
 
     /**
-     * Launch the game.
+     * Launch the App.
      *
      * @param args Not used for the moment (Will probably be used to pass some
      * settings)

@@ -33,48 +33,29 @@ import dte.javainterface.view.View;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Controller of the App. Manage all the functionalities
+ */
 public class Controller {
 
     private final Model model;
     private View view;
 
+    /**
+     * Controller's constructor with a Model in parametter
+     *
+     * @param model
+     */
     public Controller(Model model) {
         this.model = model;
     }
 
+    /**
+     * Connect a view to this controller
+     *
+     * @param view
+     */
     public void addView(View view) {
         this.view = view;
     }
-
-    public void startGame() throws InterruptedException {
-
-        this.view.update(null, "App Started");
-
-        Thread dteLoop = new Thread(new DTELoop());
-        dteLoop.start();
-    }
-
-    private class DTELoop implements Runnable {
-
-        public DTELoop() {
-        }
-
-        public void run() {
-
-            while (true) {
-
-                try {
-                    System.out.println("Game Loop");
-                    Thread.sleep(2000);
-                } catch (NullPointerException e) {
-
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-
-        }
-    }
-
 }

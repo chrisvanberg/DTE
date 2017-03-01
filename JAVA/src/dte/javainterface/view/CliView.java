@@ -32,18 +32,35 @@ import dte.javainterface.controller.Controller;
 import dte.javainterface.model.Model;
 import java.util.Observable;
 
+/**
+ * ConsoleLine View of the App
+ */
 public class CliView extends View {
 
+    /**
+     * View's constructor with a Controller and a Model
+     *
+     * @param controller Controller of this view
+     * @param model Model of the app
+     */
     public CliView(Controller controller, Model model) {
         super(controller, model);
     }
 
+    /**
+     * Update the view. Triggered when the Model change
+     *
+     * @param o Observable Object
+     * @param arg Object the argument
+     */
     @Override
     public void update(Observable o, Object arg) {
-
         draw();
     }
 
+    /**
+     * Draw the view on the standart output
+     */
     public void draw() {
         System.out.println("Welcome to DTE !");
     }
