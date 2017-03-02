@@ -7,11 +7,11 @@ import dte.javainterface.view.GuiView;
 
 public class DTE {
 
-    private Model model;
-    private Controller guiController;
-    private Controller cliController;
-    private CliView cli;
-    private GuiView gui;
+    private final Model model;
+    private final Controller guiController;
+    private final Controller cliController;
+    private final CliView cli;
+    private final GuiView gui;
 
     /**
      * Setup the Model, the controller and the view.

@@ -7,8 +7,8 @@ import java.util.Observer;
 
 public abstract class View extends javax.swing.JFrame implements Observer {
 
-    Model model;
-    Controller controller;
+    private Model model;
+    private Controller controller;
 
     public View(Controller controller, Model model) {
         this.model = model;
