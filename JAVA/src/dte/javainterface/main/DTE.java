@@ -16,8 +16,7 @@ public class DTE {
     /**
      * Setup the Model, the controller and the view.
      */
-    public void DTE() {
-        System.out.println("Hello");
+    public DTE() {
         model = new Model();
         guiController = new Controller(model);
         cliController = new Controller(model);
@@ -37,13 +36,13 @@ public class DTE {
     }
 
     /**
-     * Launch the app.
+     * Launch the game.
      *
      * @param args Not used for the moment (Will probably be used to pass some
      * settings)
      */
     public static void main(String[] args) {
-        
+
         javax.swing.SwingUtilities.invokeLater(DTE::new);
 
     }

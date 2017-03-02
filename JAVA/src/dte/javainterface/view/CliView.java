@@ -17,9 +17,7 @@ public class CliView extends View {
     }
     
     public void draw(){
-        while(true){
-        System.out.println("Hello World !");
-        }
+        System.out.println("Welcome to DTE !");
     }
 
 }
