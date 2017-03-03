@@ -1,3 +1,5 @@
+<img src="https://docs.chrisv.be/DTE/DTE.svg" alt="DTE Logo" width="100%" height="144">
+___
 # DTE ( Digital Temperature Equipment )
 EPHEC - 2016/17 - T207 Électronique digitale, traitement de signal
 
