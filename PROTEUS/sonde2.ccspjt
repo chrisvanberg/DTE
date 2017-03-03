@@ -20,7 +20,7 @@ D1_L=26
 D1_L1=[39209]Project Opened.
 D1_L2=[39377]Started Editing.
 D1_L3=[40598]Stopped Editing.
-TotalEdit=216
+TotalEdit=217
 TotalDebug=0
 D1_E=77
 D1_D=0
@@ -179,12 +179,15 @@ D8_L11=[44333]Stopped Editing.
 D8_L12=[44861]Started Editing.
 D8_L13=[45177]Stopped Editing.
 D9=03-03-2017
-D9_L=5
+D9_L=6
 D9_L1=[50432]Project Opened.
 D9_L2=[51713]Started Editing.
 D9_L3=[52063]Stopped Editing.
 D9_L4=[53199]Started Editing.
 D9_L5=[53503]Stopped Editing.
+D9_E=1
+D9_D=0
+D9_L6=[54629]Project Closed.
 
 [Opened Files]
 1=sonde2.c
