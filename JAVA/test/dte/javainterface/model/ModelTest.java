@@ -5,7 +5,7 @@
  * Christophe Van Waesberghe <contact@chrisv.be>
  * Amélie Courtin <a.courtin@students.ephec.be>
  * Mathieu Rousseau <m.rousseau@students.ephec.be>
- * Nathan Dolinski <n.dolinski@students.ephec.be>
+ * Nathan Dolinsky <n.dolinsky@students.ephec.be>
  * (Groupe 05, 2016/17)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
