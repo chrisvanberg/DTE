@@ -46,8 +46,10 @@ void checkLed(int temp) {
    if (temp > TRESHOLD) {
       output_low(GREEN_LED);
       output_high(RED_LED);
+      printf(3); // alert level => Warning
    } else { // Otherwise, green LED
       output_high(GREEN_LED);
+      printf(0); // alert level => Cooling
    }
 }
 
@@ -63,6 +65,7 @@ void main()
    
    int temperature;
    delay_ms(10);
+   printf("%d", TRESHOLD); // send treshold on connection with java interface
    
    while(TRUE) {
       //delay_ms(10);
@@ -70,7 +73,9 @@ void main()
       // And convert it to a range from 0 to 100 (°C)
       // 0.48 => (5 / 1023) * 100
       temperature = read_adc() * CONV_CST;
-      printf("%d",temperature);
+      
+      // Send temperature to RS232
+      printf("%d", temperature);
       // Check temp level
       checkLed(temperature);
 
