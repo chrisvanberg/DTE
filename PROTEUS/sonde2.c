@@ -31,9 +31,6 @@ void bitsToBCD(int value) {
    output_d(unity);
    output_low(TENS_DISPLAY);
    output_high(UNITY_DISPLAY);
-   
-   
-   
    delay_ms(10);
 }
 

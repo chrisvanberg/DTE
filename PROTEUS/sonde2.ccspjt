@@ -179,9 +179,12 @@ D8_L11=[44333]Stopped Editing.
 D8_L12=[44861]Started Editing.
 D8_L13=[45177]Stopped Editing.
 D9=03-03-2017
-D9_L=2
+D9_L=5
 D9_L1=[50432]Project Opened.
 D9_L2=[51713]Started Editing.
+D9_L3=[52063]Stopped Editing.
+D9_L4=[53199]Started Editing.
+D9_L5=[53503]Stopped Editing.
 
 [Opened Files]
 1=sonde2.c
