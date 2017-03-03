@@ -1,2 +1,0 @@
-# DTE
-Projet d'électronique
