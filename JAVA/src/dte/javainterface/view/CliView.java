@@ -62,7 +62,7 @@ public class CliView extends View {
      * Draw the view on the standart output
      */
     public void draw() {
-        System.out.println("Welcome to DTE !");
+        
     }
 
 }

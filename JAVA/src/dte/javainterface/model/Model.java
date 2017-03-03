@@ -28,32 +28,49 @@
  */
 package dte.javainterface.model;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Observable;
 
 /**
  * Model of the App, contain all the data.a
  */
 public class Model extends Observable {
+
     private int currentTemperature;
-    private int alertTemperature;
+    private int thresholdTemperature;
     private int alertLevel;
     
+    private HashMap<Date, Integer> temperatures;
+
     /**
      * Model's constructor without parametters
      */
-    public Model(){
-        
+    public Model() {
     }
-    
+
     /**
      * Full Model constructor
-     * @param currentTemperature Must be an int and be the current temperature given by the sensors
-     * @param alertTemperature Must be an int and be the temperature who trigger the alert
-     * @param alertLevel Must be an int>0 who represent the current lever of alert (0:Cooling,1:OK,2:heating,3:alert) 
+     *
+     * @param currentTemperature Must be an int and be the current temperature
+     * given by the sensors
+     * @param thresholdTemperature Must be an int and be the temperature who
+     * trigger the alert
+     * @param alertLevel Must be an int>0 who represent the current lever of
+     * alert (0:Cooling,1:OK,2:heating,3:alert)
      */
-    public Model(int currentTemperature, int maxTemperature, int alertLevel){
-        this.currentTemperature=currentTemperature;
-        this.alertTemperature=maxTemperature;
-        this.alertLevel=alertLevel;
+    public Model(int currentTemperature, int thresholdTemperature, int alertLevel) {
+        //Instance variable initialization
+        this.currentTemperature = currentTemperature;
+        this.thresholdTemperature = thresholdTemperature;
+        this.alertLevel = alertLevel;
+        this.temperatures = new HashMap<Date, Integer>();
+
+        //Update of the temperature
+        this.temperatures.put(new Date(), currentTemperature);
+
     }
+    
+    
 }

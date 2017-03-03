@@ -35,8 +35,8 @@ import java.util.Observer;
 
 public abstract class View extends javax.swing.JFrame implements Observer {
 
-    private Model model;
-    private Controller controller;
+    protected Model model;
+    protected Controller controller;
 
     public View(Controller controller, Model model) {
         this.model = model;
