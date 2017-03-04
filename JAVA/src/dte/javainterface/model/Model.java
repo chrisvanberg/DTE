@@ -53,21 +53,21 @@ public class Model extends Observable {
      */
     public static final int MAX_ALERT_LVL=3;
     /**
-     * The AlertLevel 0 : {@value #ALERT_LVL_0}
+     * The Cooling Alert Level : {@value #ALERT_COOLING}
      */
-    public static final String ALERT_LVL_0="COOLING";
+    public static final int ALERT_COOLING=0;
     /**
-     * The AlertLevel 1: {@value #ALERT_LVL_1}
+     * The OK Alert Level : {@value #ALERT_OK}
      */
-    public static final String ALERT_LVL_1="OK";
+    public static final int ALERT_OK=1;
     /**
-     * The AlertLevel 2: {@value #ALERT_LVL_2}
+     * The HEATING AlertLevel : {@value #ALERT_HEATING}
      */
-    public static final String ALERT_LVL_2="HEATING";
+    public static final int ALERT_HEATING=2;
     /**
-     * The AlertLevel 3: {@value #ALERT_LVL_3}
+     * The OVERHEATING (When the temperature is over the threshold) AlertLevel: {@value #ALERT_OVERHEATING}
      */
-    public static final String ALERT_LVL_3="ALERT";
+    public static final int ALERT_OVERHEATING=3;
     
 
     /**
@@ -88,9 +88,10 @@ public class Model extends Observable {
      * given by the sensors
      * @param thresholdTemperature Must be an int and be the temperature who
      * trigger the alert
-     * @param alertLevel int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_LVL_0}, {@value #ALERT_LVL_1}, {@value #ALERT_LVL_2}, {@value #ALERT_LVL_3}}
+     * @param alertLevel int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_COOLING}, {@value #ALERT_OK}, {@value #ALERT_HEATING}, {@value #ALERT_OVERHEATING}}
+     * @throws UnknowAlertLevelException When the alertLevel parametter is strictly smaller than {@value #MIN_ALERT_LVL} and stritly bigger than {@value #MAX_ALERT_LVL}
      */
-    public Model(int currentTemperature, int thresholdTemperature, int alertLevel) {
+    public Model(int currentTemperature, int thresholdTemperature, int alertLevel) throws UnknowAlertLevelException {
         //Instance variable initialization
         this.currentTemperature = currentTemperature;
         this.thresholdTemperature = thresholdTemperature;
@@ -99,9 +100,24 @@ public class Model extends Observable {
         this.alertLevelHistory = new LinkedHashMap<Date, Integer>();
 
         //Update of the temperature & alertLevel
-        this.addTemperatureToHistory(currentTemperature);
+        this.addTemperatureToHistory(this.currentTemperature);
+        this.addAlertLevelToHistory(this.alertLevel);
+    }
+    
+    /**
+     * Model constructor with current and threshold temperature. Automaticaly calculate the AlertLevel
+     * @param currentTemperature
+     * @param thresholdTemperature 
+     */
+    public Model(int currentTemperature, int thresholdTemperature){
+        this.currentTemperature = currentTemperature;
+        this.thresholdTemperature = thresholdTemperature;
+        this.alertLevel = currentTemperature<thresholdTemperature ? 1 : 3;
+        this.temperaturesHistory = new LinkedHashMap<Date, Integer>();
+        this.alertLevelHistory = new LinkedHashMap<Date, Integer>();
+        
         try {
-            this.addAlertLevelToHistory(alertLevel);
+            this.addAlertLevelToHistory(this.alertLevel);
         } catch (UnknowAlertLevelException ex) {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -142,7 +158,7 @@ public class Model extends Observable {
 
     /**
      * Get the current AlertLevel
-     * @return int greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_LVL_0}, {@value #ALERT_LVL_1}, {@value #ALERT_LVL_2}, {@value #ALERT_LVL_3}}
+     * @return int greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_COOLING}, {@value #ALERT_OK}, {@value #ALERT_HEATING}, {@value #ALERT_OVERHEATING}}
      */
     public int getAlertLevel() {
         return alertLevel;
@@ -150,8 +166,8 @@ public class Model extends Observable {
 
     /**
      * Set the alertLevel and record it on the AlertLevelHistory HashMap
-     * @param alertLevel int int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_LVL_0}, {@value #ALERT_LVL_1}, {@value #ALERT_LVL_2}, {@value #ALERT_LVL_3}}
-     * @throws UnknowAlertLevelException When the parametter is strictly smaller than 0 and stritly bigger than 3
+     * @param alertLevel int int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_COOLING}, {@value #ALERT_OK}, {@value #ALERT_HEATING}, {@value #ALERT_OVERHEATING}}
+     * @throws UnknowAlertLevelException When the parametter is strictly smaller than {@value #MIN_ALERT_LVL} and stritly bigger than {@value #MAX_ALERT_LVL}
      */
     public void setAlertLevel(int alertLevel) throws UnknowAlertLevelException{
         
@@ -169,8 +185,8 @@ public class Model extends Observable {
 
     /**
      * Add a record of alertLevel to the history at the current date
-     * @param alertLevel int int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_LVL_0}, {@value #ALERT_LVL_1}, {@value #ALERT_LVL_2}, {@value #ALERT_LVL_3}}
-     * @throws UnknowAlertLevelException When the parametter is strictly smaller than 0 and stritly bigger than 3
+     * @param alertLevel int int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_COOLING}, {@value #ALERT_OK}, {@value #ALERT_HEATING}, {@value #ALERT_OVERHEATING}}
+     * @throws UnknowAlertLevelException When the parametter is strictly smaller than {@value #MIN_ALERT_LVL} and stritly bigger than {@value #MAX_ALERT_LVL}
      */
     public final void addAlertLevelToHistory(int alertLevel) throws UnknowAlertLevelException {
         this.temperaturesHistory.put(new Date(), alertLevel);
@@ -179,8 +195,8 @@ public class Model extends Observable {
     /**
      * Add a record of alertLevel to the history at the current date
      * @param date Date when the alertLevel was set
-     * @param alertLevel int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_LVL_0}, {@value #ALERT_LVL_1}, {@value #ALERT_LVL_2}, {@value #ALERT_LVL_3}}
-     * @throws UnknowAlertLevelException When the parametter is strictly smaller than 0 and stritly bigger than 3
+     * @param alertLevel int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_COOLING}, {@value #ALERT_OK}, {@value #ALERT_HEATING}, {@value #ALERT_OVERHEATING}}
+     * @throws UnknowAlertLevelException When the parametter is strictly smaller than {@value #MIN_ALERT_LVL} and stritly bigger than {@value #MAX_ALERT_LVL}
      */
     public final void addAlertLevelToHistory(Date date,int alertLevel) throws UnknowAlertLevelException {
         this.temperaturesHistory.put(date, alertLevel);
@@ -234,11 +250,10 @@ public class Model extends Observable {
     
     /**
      * Check if the given alertLevel is correct
-     * @param alertLevel int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_LVL_0}, {@value #ALERT_LVL_1}, {@value #ALERT_LVL_2}, {@value #ALERT_LVL_3}}
+     * @param alertLevel int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_COOLING}, {@value #ALERT_OK}, {@value #ALERT_HEATING}, {@value #ALERT_OVERHEATING}}
      * @return true if the given alertLevel is correct; False otherwise.
      */
     public boolean isAlertLevelCorrect(int alertLevel){
-        
         
         return MIN_ALERT_LVL<=alertLevel && alertLevel<=MAX_ALERT_LVL;
         
