@@ -44,11 +44,29 @@ public class Model extends Observable {
     private LinkedHashMap<Date, Integer> temperaturesHistory;
     private LinkedHashMap<Date, Integer> alertLevelHistory;
     
+    /**
+     * Represent the smallest alertLevel : {@value #MIN_ALERT_LVL}
+     */
     public static final int MIN_ALERT_LVL=0;
+    /**
+     * Represent the biggest alertLevel : {@value #MAX_ALERT_LVL}
+     */
     public static final int MAX_ALERT_LVL=3;
+    /**
+     * The AlertLevel 0 : {@value #ALERT_LVL_0}
+     */
     public static final String ALERT_LVL_0="COOLING";
+    /**
+     * The AlertLevel 1: {@value #ALERT_LVL_1}
+     */
     public static final String ALERT_LVL_1="OK";
+    /**
+     * The AlertLevel 2: {@value #ALERT_LVL_2}
+     */
     public static final String ALERT_LVL_2="HEATING";
+    /**
+     * The AlertLevel 3: {@value #ALERT_LVL_3}
+     */
     public static final String ALERT_LVL_3="ALERT";
     
 
