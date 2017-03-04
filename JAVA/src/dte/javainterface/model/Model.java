@@ -43,9 +43,17 @@ public class Model extends Observable {
     
     private LinkedHashMap<Date, Integer> temperaturesHistory;
     private LinkedHashMap<Date, Integer> alertLevelHistory;
+    
+    public static final int MIN_ALERT_LVL=0;
+    public static final int MAX_ALERT_LVL=3;
+    public static final String ALERT_LVL_0="COOLING";
+    public static final String ALERT_LVL_1="OK";
+    public static final String ALERT_LVL_2="HEATING";
+    public static final String ALERT_LVL_3="ALERT";
+    
 
     /**
-     * Empty Model constructor. Initialize the history and set all the variables to -1000.
+     * Empty Model constructor. Initialize the history and set all the instance variables to -1000.
      */
     public Model(){
         this.currentTemperature= -1000;
@@ -62,8 +70,7 @@ public class Model extends Observable {
      * given by the sensors
      * @param thresholdTemperature Must be an int and be the temperature who
      * trigger the alert
-     * @param alertLevel Must be an int greater than 0 and smaller than 3 (0:Cooling,1:OK,2:heating,3:alert) who represent the current lever of
-     * alert (0:Cooling,1:OK,2:heating,3:alert)
+     * @param alertLevel int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_LVL_0}, {@value #ALERT_LVL_1}, {@value #ALERT_LVL_2}, {@value #ALERT_LVL_3}}
      */
     public Model(int currentTemperature, int thresholdTemperature, int alertLevel) {
         //Instance variable initialization
@@ -117,7 +124,7 @@ public class Model extends Observable {
 
     /**
      * Get the current AlertLevel
-     * @return int AlertLevel (0:Cooling,1:OK,2:heating,3:alert)
+     * @return int greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_LVL_0}, {@value #ALERT_LVL_1}, {@value #ALERT_LVL_2}, {@value #ALERT_LVL_3}}
      */
     public int getAlertLevel() {
         return alertLevel;
@@ -125,7 +132,7 @@ public class Model extends Observable {
 
     /**
      * Set the alertLevel and record it on the AlertLevelHistory HashMap
-     * @param alertLevel int Must be greater than 0 and smaller than 3 (0:Cooling,1:OK,2:heating,3:alert)
+     * @param alertLevel int int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_LVL_0}, {@value #ALERT_LVL_1}, {@value #ALERT_LVL_2}, {@value #ALERT_LVL_3}}
      * @throws UnknowAlertLevelException When the parametter is strictly smaller than 0 and stritly bigger than 3
      */
     public void setAlertLevel(int alertLevel) throws UnknowAlertLevelException{
@@ -144,7 +151,7 @@ public class Model extends Observable {
 
     /**
      * Add a record of alertLevel to the history at the current date
-     * @param alertLevel int Must be greater than 0 and smaller than 3 (0:Cooling,1:OK,2:heating,3:alert)
+     * @param alertLevel int int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_LVL_0}, {@value #ALERT_LVL_1}, {@value #ALERT_LVL_2}, {@value #ALERT_LVL_3}}
      * @throws UnknowAlertLevelException When the parametter is strictly smaller than 0 and stritly bigger than 3
      */
     public final void addAlertLevelToHistory(int alertLevel) throws UnknowAlertLevelException {
@@ -154,7 +161,7 @@ public class Model extends Observable {
     /**
      * Add a record of alertLevel to the history at the current date
      * @param date Date when the alertLevel was set
-     * @param alertLevel int Must be greater than 0 and smaller than 3 (0:Cooling,1:OK,2:heating,3:alert)
+     * @param alertLevel int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_LVL_0}, {@value #ALERT_LVL_1}, {@value #ALERT_LVL_2}, {@value #ALERT_LVL_3}}
      * @throws UnknowAlertLevelException When the parametter is strictly smaller than 0 and stritly bigger than 3
      */
     public final void addAlertLevelToHistory(Date date,int alertLevel) throws UnknowAlertLevelException {
@@ -209,14 +216,13 @@ public class Model extends Observable {
     
     /**
      * Check if the given alertLevel is correct
-     * @param alertLevel int Must be greater than 0 and smaller than 3 (0:Cooling,1:OK,2:heating,3:alert)
+     * @param alertLevel int Must be greater than {@value #MIN_ALERT_LVL} and smaller than {@value #MAX_ALERT_LVL} {{@value #ALERT_LVL_0}, {@value #ALERT_LVL_1}, {@value #ALERT_LVL_2}, {@value #ALERT_LVL_3}}
      * @return true if the given alertLevel is correct; False otherwise.
      */
     public boolean isAlertLevelCorrect(int alertLevel){
-        int min = 0;
-        int max = 3;
         
-        return min<=alertLevel && alertLevel<=max;
+        
+        return MIN_ALERT_LVL<=alertLevel && alertLevel<=MAX_ALERT_LVL;
         
     }
 }
