@@ -26,6 +26,8 @@ package dte.javainterface.model;
 import dte.javainterface.exceptions.EmptyHistoryException;
 import dte.javainterface.exceptions.NoHistoryDataAvaliableException;
 import dte.javainterface.exceptions.UnknowAlertLevelException;
+import static dte.javainterface.model.Model.ALERT_IDLE;
+import static dte.javainterface.model.Model.ALERT_OVERHEATING;
 import static dte.javainterface.model.Model.MAX_ALERT_LVL;
 import static dte.javainterface.model.Model.MIN_ALERT_LVL;
 import java.util.ArrayList;
@@ -65,7 +67,7 @@ public class ModelTest extends TestCase {
      */
     public void testGetCurrentTemperature() {
         System.out.println("getCurrentTemperature");
-        Model instance = new Model(15, 20, 0);
+        Model instance = new Model(15, 20);
         int expResult = 15;
         int result = instance.getCurrentTemperature();
         assertEquals(expResult, result);
@@ -78,12 +80,26 @@ public class ModelTest extends TestCase {
     public void testSetCurrentTemperature() {
         System.out.println("setCurrentTemperature");
         int currentTemperature = 13;
-        Model instance = new Model(15, 20, 0);
+        Model instance = new Model(15, 20);
         instance.setCurrentTemperature(currentTemperature);
 
         int expResult = currentTemperature;
         int result = instance.getCurrentTemperature();
         assertEquals(expResult, result);
+
+        try {
+            LinkedHashMap<Date, Integer> history = instance.getTemperaturesHistory();
+            Date theLastEntry = new ArrayList<>(history.keySet()).get(history.size() - 1);
+            try {
+
+                assertEquals(currentTemperature, instance.getTemperatureFromHistory(theLastEntry));
+            } catch (NoHistoryDataAvaliableException ex) {
+                fail("setCurrentTemperature should have filled the history (NoHistoryDataAvaliableException)");
+            }
+        } catch (EmptyHistoryException ex) {
+            fail("setCurrentTemperature should have filled the history (EmptyHistoryException)");
+        }
+
     }
 
     /**
@@ -91,7 +107,7 @@ public class ModelTest extends TestCase {
      */
     public void testGetThresholdTemperature() {
         System.out.println("getThresholdTemperature");
-        Model instance = new Model(15, 20, 0);
+        Model instance = new Model(15, 20);
         int expResult = 20;
         int result = instance.getThresholdTemperature();
         assertEquals(expResult, result);
@@ -104,7 +120,7 @@ public class ModelTest extends TestCase {
     public void testSetThresholdTemperature() {
         System.out.println("setThresholdTemperature");
         int thresholdTemperature = 30;
-        Model instance = new Model(15, 20, 0);
+        Model instance = new Model(15, 20);
         instance.setThresholdTemperature(thresholdTemperature);
 
         int expResult = thresholdTemperature;
@@ -118,10 +134,16 @@ public class ModelTest extends TestCase {
      */
     public void testGetAlertLevel() {
         System.out.println("getAlertLevel");
-        Model instance = new Model(15, 20, 1);
-        int expResult = 1;
-        int result = instance.getAlertLevel();
-        assertEquals(expResult, result);
+        int alertLevel = 1;
+        Model instance;
+        try {
+            instance = new Model(15, 20, alertLevel);
+            int expResult = 1;
+            int result = instance.getAlertLevel();
+            assertEquals(expResult, result);
+        } catch (UnknowAlertLevelException ex) {
+            fail("The test AlertLevel is unknow: " + alertLevel);
+        }
 
     }
 
@@ -132,8 +154,8 @@ public class ModelTest extends TestCase {
      */
     public void testSetAlertLevel() throws UnknowAlertLevelException {
         System.out.println("setAlertLevel");
-        int alertLevel = 3;
-        Model instance = new Model(15, 20, 0);
+        int alertLevel = ALERT_OVERHEATING;
+        Model instance = new Model(15, 20);
         instance.setAlertLevel(alertLevel);
 
         int expResult = alertLevel;
@@ -141,8 +163,8 @@ public class ModelTest extends TestCase {
         assertEquals(expResult, result);
 
         try {
-            instance.setAlertLevel(MAX_ALERT_LVL+1);
-            fail("Should have thhowned an UnknowAlertLevelException");
+            instance.setAlertLevel(MAX_ALERT_LVL + 1);
+            fail("Should have throwned an UnknowAlertLevelException");
         } catch (UnknowAlertLevelException e) {
             assertTrue(e.getMessage().contains("Given Alert Level is not defined!"));
         }
@@ -153,7 +175,7 @@ public class ModelTest extends TestCase {
      */
     public void testGetTemperaturesHistory() {
         System.out.println("getTemperaturesHistory");
-        Model instance = new Model(15, 20, 0);
+        Model instance = new Model(15, 20);
 
         LinkedHashMap<Date, Integer> result;
 
@@ -172,15 +194,15 @@ public class ModelTest extends TestCase {
     public void testAddTemperatureToHistory_int() {
         System.out.println("addTemperatureToHistory");
         int temperature = 12;
-        Model instance = new Model(15, 20, 0);
+        Model instance = new Model(15, 20);
         instance.addTemperatureToHistory(temperature);
 
         try {
             LinkedHashMap<Date, Integer> history = instance.getTemperaturesHistory();
-            Date theLastKey = new ArrayList<>(history.keySet()).get(history.size() - 1);
+            Date theLastEntry = new ArrayList<>(history.keySet()).get(history.size() - 1);
             try {
 
-                assertEquals(temperature, instance.getTemperatureFromHistory(theLastKey));
+                assertEquals(temperature, instance.getTemperatureFromHistory(theLastEntry));
             } catch (NoHistoryDataAvaliableException ex) {
                 Logger.getLogger(ModelTest.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -196,7 +218,7 @@ public class ModelTest extends TestCase {
         System.out.println("addTemperatureToHistory");
         Date date = new Date();
         int temperature = 17;
-        Model instance = new Model(15, 20, 0);
+        Model instance = new Model(15, 20);
         instance.addTemperatureToHistory(date, temperature);
 
         try {
@@ -212,7 +234,7 @@ public class ModelTest extends TestCase {
     public void testGetTemperatureFromHistory() {
         System.out.println("getTemperatureFromHistory");
         Date date = new Date();
-        Model instance = new Model(15, 20, 0);
+        Model instance = new Model(15, 20);
         int expResult = 15;
         int result;
         try {
@@ -237,7 +259,7 @@ public class ModelTest extends TestCase {
      */
     public void testGetAlertLevelHistory() {
         System.out.println("getAlertLevelHistory");
-        Model instance = new Model(15, 20, 0);
+        Model instance = new Model(15, 20);
 
         try {
             LinkedHashMap<Date, Integer> result = instance.getTemperaturesHistory();
@@ -254,7 +276,7 @@ public class ModelTest extends TestCase {
     public void testAddAlertLevelToHistory_int() {
         System.out.println("addAlertLevelToHistory");
 
-        Model instance = new Model(15, 20, 0);
+        Model instance = new Model(15, 20);
 
         for (int i = -1; i < 10; i++) {
             try {
@@ -307,15 +329,14 @@ public class ModelTest extends TestCase {
     public void testIsAlertLevelCorrect() {
         System.out.println("isAlertLevelCorrect");
         Model instance = new Model();
-        for(int i=-1; i<10; i++){
+        for (int i = -1; i < 10; i++) {
             if (MIN_ALERT_LVL <= i && i <= MAX_ALERT_LVL) {
                 assertTrue(instance.isAlertLevelCorrect(i));
-            }
-            else{
+            } else {
                 assertFalse(instance.isAlertLevelCorrect(i));
             }
         }
-        
+
     }
 
     /**
@@ -323,27 +344,40 @@ public class ModelTest extends TestCase {
      */
     public void testGetAlertLevelFromHistory() {
         System.out.println("getAlertLevelFromHistory");
-        Date date = new Date();
-        Model instance = new Model(15,20,0);
-        int expResult = 0;
+
+        Model instance = new Model(15, 20);
+
+        int expResult = ALERT_IDLE;
         int result;
-        
         try {
-            result = instance.getAlertLevelFromHistory(date);
-            assertEquals(expResult, result);
-        } catch (NoHistoryDataAvaliableException ex) {
-            fail("Should not have thrown an NoHistoryDataAvaliableException");
+            instance.setAlertLevel(ALERT_IDLE);
+
+            try {
+                LinkedHashMap<Date, Integer> history = instance.getAlertLevelHistory();
+                Date theLastEntry = new ArrayList<>(history.keySet()).get(history.size() - 1);
+                try {
+                    result = instance.getAlertLevelFromHistory(theLastEntry);
+                    assertEquals(expResult, result);
+                } catch (NoHistoryDataAvaliableException ex) {
+                    fail("Should not have thrown an NoHistoryDataAvaliableException");
+                }
+
+                instance = new Model();
+
+                try {
+                    instance.getAlertLevelFromHistory(theLastEntry);
+                    fail("Should have thrown an NoHistoryDataAvaliableException");
+                } catch (NoHistoryDataAvaliableException ex) {
+                    assertTrue(ex.getMessage().contains("There is no data recorded at this date!"));
+                }
+
+            } catch (EmptyHistoryException ex) {
+                fail("getAlertLevelHistory have thrown an EmptyHistoryException. Unable to complete the test");
+            }
+        } catch (UnknowAlertLevelException ex) {
+            fail("test AlertLevel is Unknow (UnknowAlertLevelException)");
         }
-        
-        instance = new Model();
-        
-        try {
-            result = instance.getAlertLevelFromHistory(date);
-            fail("Should have thrown an NoHistoryDataAvaliableException");
-        } catch (NoHistoryDataAvaliableException ex) {
-            assertTrue(ex.getMessage().contains("There is no data recorded at this date!"));
-        }
-        
+
     }
 
 }
