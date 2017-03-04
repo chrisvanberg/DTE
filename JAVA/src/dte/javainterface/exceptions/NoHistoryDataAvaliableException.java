@@ -23,26 +23,32 @@
  */
 package dte.javainterface.exceptions;
 
+import java.util.Date;
+
 /**
  * NotTemperatureAvaliableException is triggered when you try to access to a date when there is no temperature recorded
  * 
  */
-public class NoTemperatureAvaliableException extends Exception {
+public class NoHistoryDataAvaliableException extends Exception {
  
 
-    public NoTemperatureAvaliableException() {
-        super();
+    public NoHistoryDataAvaliableException() {
+        super("There is no data recorded at this date!");
+    }
+    
+    public NoHistoryDataAvaliableException(Date date){
+        super("There is no data recorded at this date! :"+date.toString());
     }
 
-    public NoTemperatureAvaliableException(String message) {
+    public NoHistoryDataAvaliableException(String message) {
         super(message);
     }
 
-    public NoTemperatureAvaliableException(String message, Throwable cause) {
+    public NoHistoryDataAvaliableException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public NoTemperatureAvaliableException(Throwable cause) {
+    public NoHistoryDataAvaliableException(Throwable cause) {
         super(cause);
     }
 }

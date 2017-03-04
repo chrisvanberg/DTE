@@ -24,11 +24,11 @@
 package dte.javainterface.model;
 
 import dte.javainterface.exceptions.EmptyHistoryException;
-import dte.javainterface.exceptions.NoTemperatureAvaliableException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Observable;
+import dte.javainterface.exceptions.NoHistoryDataAvaliableException;
 import dte.javainterface.exceptions.UnknowAlertLevelException;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,15 +41,18 @@ public class Model extends Observable {
     private int thresholdTemperature;
     private int alertLevel;
     
-    private HashMap<Date, Integer> temperaturesHistory;
-    private HashMap<Date, Integer> alertLevelHistory;
+    private LinkedHashMap<Date, Integer> temperaturesHistory;
+    private LinkedHashMap<Date, Integer> alertLevelHistory;
 
+    /**
+     * Empty Model constructor. Initialize the history and set all the variables to -1000.
+     */
     public Model(){
         this.currentTemperature= -1000;
         this.thresholdTemperature = -1000;
         this.alertLevel = -1000;
-        this.temperaturesHistory = new HashMap<Date, Integer>();
-        this.alertLevelHistory = new HashMap<Date, Integer>();
+        this.temperaturesHistory = new LinkedHashMap<Date, Integer>();
+        this.alertLevelHistory = new LinkedHashMap<Date, Integer>();
     }
     
     /**
@@ -67,8 +70,8 @@ public class Model extends Observable {
         this.currentTemperature = currentTemperature;
         this.thresholdTemperature = thresholdTemperature;
         this.alertLevel = alertLevel;
-        this.temperaturesHistory = new HashMap<Date, Integer>();
-        this.alertLevelHistory = new HashMap<Date, Integer>();
+        this.temperaturesHistory = new LinkedHashMap<Date, Integer>();
+        this.alertLevelHistory = new LinkedHashMap<Date, Integer>();
 
         //Update of the temperature & alertLevel
         this.addTemperatureToHistory(currentTemperature);
@@ -126,6 +129,7 @@ public class Model extends Observable {
      * @throws UnknowAlertLevelException When the parametter is strictly smaller than 0 and stritly bigger than 3
      */
     public void setAlertLevel(int alertLevel) throws UnknowAlertLevelException{
+        
         this.alertLevel = alertLevel;
     }
 
@@ -134,7 +138,7 @@ public class Model extends Observable {
      * @return HashMap(Date, Integer) AlertLevel history
      * @throws EmptyHistoryException when there is no AlertLevel recorded yet.
      */
-    public HashMap<Date, Integer> getAlertLevelHistory() throws EmptyHistoryException {
+    public LinkedHashMap<Date, Integer> getAlertLevelHistory() throws EmptyHistoryException {
         return alertLevelHistory;
     }
 
@@ -143,7 +147,7 @@ public class Model extends Observable {
      * @param alertLevel int Must be greater than 0 and smaller than 3 (0:Cooling,1:OK,2:heating,3:alert)
      * @throws UnknowAlertLevelException When the parametter is strictly smaller than 0 and stritly bigger than 3
      */
-    public void addAlertLevelToHistory(int alertLevel) throws UnknowAlertLevelException {
+    public final void addAlertLevelToHistory(int alertLevel) throws UnknowAlertLevelException {
         this.temperaturesHistory.put(new Date(), alertLevel);
     }
     
@@ -153,8 +157,18 @@ public class Model extends Observable {
      * @param alertLevel int Must be greater than 0 and smaller than 3 (0:Cooling,1:OK,2:heating,3:alert)
      * @throws UnknowAlertLevelException When the parametter is strictly smaller than 0 and stritly bigger than 3
      */
-    public void addAlertLevelToHistory(Date date,int alertLevel) throws UnknowAlertLevelException {
+    public final void addAlertLevelToHistory(Date date,int alertLevel) throws UnknowAlertLevelException {
         this.temperaturesHistory.put(date, alertLevel);
+    }
+    
+    /**
+     * getAlertLevelFromHistory return the AlertLevel at a date
+     * @param date Date Must be in the past
+     * @return int The AlertLevel at the given date
+     * @throws NoHistoryDataAvaliableException when there is no entry at the given date
+     */
+    public int getAlertLevelFromHistory(Date date) throws NoHistoryDataAvaliableException{
+        return -1;
     }
         
     /**
@@ -162,7 +176,7 @@ public class Model extends Observable {
      * @return HashMap(date, Integer) temperatureHistory
      * @throws EmptyHistoryException when there is no temperature recorded yet
      */
-    public HashMap<Date, Integer> getTemperaturesHistory() throws EmptyHistoryException{
+    public LinkedHashMap<Date, Integer> getTemperaturesHistory() throws EmptyHistoryException{
         return temperaturesHistory;
     }
     
@@ -170,9 +184,9 @@ public class Model extends Observable {
      * Get the temperature at a given date
      * @param date Must be a date in the past
      * @return int The temperature at the given date
-     * @throws NoTemperatureAvaliableException when there is no temperature recorded at the given date
+     * @throws NoHistoryDataAvaliableException when there is no temperature recorded at the given date
      */
-    public int getTemperatureFromHistory(Date date) throws NoTemperatureAvaliableException{
+    public int getTemperatureFromHistory(Date date) throws NoHistoryDataAvaliableException{
         return -1;
     }
     
@@ -180,7 +194,7 @@ public class Model extends Observable {
      * Add a temperature to the temperature history
      * @param currentTemperature int The currentTemperature
      */
-    public void addTemperatureToHistory(int currentTemperature) {
+    public final void addTemperatureToHistory(int currentTemperature) {
         this.temperaturesHistory.put(new Date(), currentTemperature);
     }
     
@@ -202,7 +216,7 @@ public class Model extends Observable {
         int min = 0;
         int max = 3;
         
-        return min<=alertLevel && alertLevel>=max;
+        return min<=alertLevel && alertLevel<=max;
         
     }
 }

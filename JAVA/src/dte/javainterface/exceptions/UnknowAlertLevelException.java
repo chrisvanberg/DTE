@@ -30,9 +30,13 @@ package dte.javainterface.exceptions;
 public class UnknowAlertLevelException extends Exception {
 
     public UnknowAlertLevelException() {
-        super();
+        super("Given Alert Level is not defined!");
     }
 
+    public UnknowAlertLevelException(int alertLevel){
+        super("Given Alert Level is not defined! : "+alertLevel);
+    }
+    
     public UnknowAlertLevelException(String message) {
         super(message);
     }
