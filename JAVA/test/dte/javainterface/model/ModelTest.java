@@ -26,15 +26,14 @@ package dte.javainterface.model;
 import dte.javainterface.exceptions.EmptyHistoryException;
 import dte.javainterface.exceptions.NoHistoryDataAvaliableException;
 import dte.javainterface.exceptions.UnknowAlertLevelException;
+import static dte.javainterface.model.Model.MAX_ALERT_LVL;
+import static dte.javainterface.model.Model.MIN_ALERT_LVL;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import junit.framework.TestCase;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
@@ -142,7 +141,7 @@ public class ModelTest extends TestCase {
         assertEquals(expResult, result);
 
         try {
-            instance.setAlertLevel(5);
+            instance.setAlertLevel(MAX_ALERT_LVL+1);
             fail("Should have thhowned an UnknowAlertLevelException");
         } catch (UnknowAlertLevelException e) {
             assertTrue(e.getMessage().contains("Given Alert Level is not defined!"));
@@ -261,7 +260,7 @@ public class ModelTest extends TestCase {
             try {
                 instance.addAlertLevelToHistory(i);
             } catch (UnknowAlertLevelException ex) {
-                if (0 <= i && i <= 3) {
+                if (MIN_ALERT_LVL <= i && i <= MAX_ALERT_LVL) {
                     fail("Should not have thrown an UnknowAlertLevelException");
                 } else {
                     fail("Should have thrown an UnknowAlertLevelException");
@@ -309,7 +308,7 @@ public class ModelTest extends TestCase {
         System.out.println("isAlertLevelCorrect");
         Model instance = new Model();
         for(int i=-1; i<10; i++){
-            if (0 <= i && i <= 3) {
+            if (MIN_ALERT_LVL <= i && i <= MAX_ALERT_LVL) {
                 assertTrue(instance.isAlertLevelCorrect(i));
             }
             else{
