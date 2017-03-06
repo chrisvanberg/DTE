@@ -5,7 +5,7 @@
  * Christophe Van Waesberghe <contact@chrisv.be>
  * Amélie Courtin <a.courtin@students.ephec.be>
  * Mathieu Rousseau <m.rousseau@students.ephec.be>
- * Nathan Dolinsky <n.dolinsky@students.ephec.be>
+ * Nathan Dolinsky <n.dolinski@students.ephec.be>
  * (Groupe 05, 2016/17)
  * 
  * The DTE Java Interface is free software: you can redistribute it and/or modify
