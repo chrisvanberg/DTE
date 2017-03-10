@@ -8868,8 +8868,8 @@ Based on the following sources:
 <instance part="C8" gate="G$1" x="287.02" y="152.4"/>
 <instance part="IC5" gate="A" x="205.74" y="109.22"/>
 <instance part="IC5" gate="B" x="205.74" y="93.98"/>
-<instance part="IC5" gate="C" x="223.52" y="109.22"/>
-<instance part="IC5" gate="D" x="223.52" y="93.98"/>
+<instance part="IC5" gate="C" x="226.06" y="109.22"/>
+<instance part="IC5" gate="D" x="226.06" y="93.98"/>
 <instance part="IC5" gate="P" x="218.44" y="119.38" rot="R90"/>
 <instance part="R11" gate="G$1" x="198.12" y="68.58" rot="R180"/>
 <instance part="R2" gate="G$1" x="35.56" y="27.94" rot="R270"/>
