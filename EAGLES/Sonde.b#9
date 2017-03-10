@@ -2406,8 +2406,10 @@ design rules under a new name.</description>
 <wire x1="88.6968" y1="69.723" x2="88.4682" y2="69.4944" width="1.016" layer="16"/>
 <wire x1="88.4682" y1="69.4944" x2="88.4682" y2="67.31" width="1.016" layer="16"/>
 <contactref element="IC5" pad="14"/>
+<contactref element="R9" pad="1"/>
 <wire x1="80.01" y1="74.93" x2="69.85" y2="74.93" width="0" layer="19" extent="1-1"/>
 <wire x1="46.99" y1="43.18" x2="46.99" y2="45.72" width="0" layer="19" extent="1-1"/>
+<wire x1="86.36" y1="36.83" x2="81.8388" y2="41.3766" width="0" layer="19" extent="16-16"/>
 <wire x1="46.99" y1="76.2" x2="69.85" y2="74.93" width="0" layer="19" extent="1-1"/>
 <wire x1="24.13" y1="3.81" x2="46.99" y2="43.18" width="0" layer="19" extent="1-1"/>
 <wire x1="15.24" y1="1.27" x2="17.4371" y2="2.8829" width="0" layer="19" extent="16-16"/>

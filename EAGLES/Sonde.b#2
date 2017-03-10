@@ -2164,6 +2164,12 @@ design rules under a new name.</description>
 <attribute name="OC_FARNELL" value="unknown" x="90.17" y="59.69" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="OC_NEWARK" value="unknown" x="90.17" y="59.69" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
+<element name="X2" library="con-ptr500" package="AK300/2" value="" x="8.89" y="-15.24">
+<attribute name="MF" value="" x="8.89" y="-15.24" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="" x="8.89" y="-15.24" size="1.778" layer="27" display="off"/>
+<attribute name="OC_FARNELL" value="unknown" x="8.89" y="-15.24" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="unknown" x="8.89" y="-15.24" size="1.778" layer="27" display="off"/>
+</element>
 </elements>
 <signals>
 <signal name="N$2">
@@ -3215,6 +3221,16 @@ design rules under a new name.</description>
 <wire x1="49.6062" y1="10.0584" x2="64.008" y2="26.289" width="0" layer="19" extent="16-16"/>
 <wire x1="10.16" y1="31.75" x2="34.29" y2="12.7" width="0" layer="19" extent="1-1"/>
 <wire x1="3.81" y1="59.69" x2="10.16" y2="31.75" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$24">
+<contactref element="IC2" pad="4"/>
+<contactref element="X2" pad="2"/>
+<wire x1="11.3792" y1="-15.24" x2="67.31" y2="27.94" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$43">
+<contactref element="X2" pad="1"/>
+<contactref element="IC2" pad="7"/>
+<wire x1="6.3754" y1="-15.24" x2="62.23" y2="35.56" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>
