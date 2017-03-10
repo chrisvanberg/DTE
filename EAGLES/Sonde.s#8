@@ -8870,7 +8870,7 @@ Based on the following sources:
 <instance part="IC5" gate="C" x="114.3" y="139.7"/>
 <instance part="IC5" gate="D" x="114.3" y="127"/>
 <instance part="IC5" gate="P" x="101.6" y="149.86" rot="R90"/>
-<instance part="R11" gate="G$1" x="187.96" y="99.06" rot="R180"/>
+<instance part="R11" gate="G$1" x="198.12" y="68.58" rot="R180"/>
 <instance part="R2" gate="G$1" x="27.94" y="45.72" rot="R180"/>
 <instance part="C9" gate="G$1" x="160.02" y="142.24" rot="R180"/>
 <instance part="R12" gate="G$1" x="200.66" y="38.1" rot="R180"/>
@@ -9336,15 +9336,6 @@ Based on the following sources:
 <wire x1="276.86" y1="99.06" x2="269.24" y2="99.06" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$41" class="0">
-<segment>
-<pinref part="R11" gate="G$1" pin="2"/>
-<pinref part="U1" gate="P1" pin="RC0/T1OSO/T1CKI"/>
-<wire x1="154.94" y1="71.12" x2="170.18" y2="71.12" width="0.1524" layer="91"/>
-<wire x1="170.18" y1="71.12" x2="170.18" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="170.18" y1="99.06" x2="182.88" y2="99.06" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$46" class="0">
 <segment>
 <pinref part="IC5" gate="A" pin="O"/>
@@ -9487,6 +9478,10 @@ Based on the following sources:
 <wire x1="269.24" y1="109.22" x2="287.02" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="R10" gate="G$1" pin="2"/>
 <wire x1="287.02" y1="109.22" x2="287.02" y2="121.92" width="0.1524" layer="91"/>
+<pinref part="R11" gate="G$1" pin="1"/>
+<wire x1="203.2" y1="68.58" x2="287.02" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="287.02" y1="68.58" x2="287.02" y2="109.22" width="0.1524" layer="91"/>
+<junction x="287.02" y="109.22"/>
 </segment>
 </net>
 <net name="N$59" class="0">
@@ -9531,10 +9526,15 @@ Based on the following sources:
 </net>
 <net name="N$27" class="0">
 <segment>
-<pinref part="R11" gate="G$1" pin="1"/>
-<wire x1="193.04" y1="99.06" x2="233.68" y2="99.06" width="0.1524" layer="91"/>
 <pinref part="LED1" gate="G$1" pin="A"/>
 <wire x1="233.68" y1="99.06" x2="233.68" y2="129.54" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$36" class="0">
+<segment>
+<pinref part="U1" gate="P1" pin="RC1/T1OSI/CCP2"/>
+<pinref part="R11" gate="G$1" pin="2"/>
+<wire x1="154.94" y1="68.58" x2="193.04" y2="68.58" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
