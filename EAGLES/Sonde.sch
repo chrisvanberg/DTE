@@ -8883,7 +8883,7 @@ Based on the following sources:
 <wire x1="190.5" y1="147.32" x2="195.58" y2="147.32" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$1" class="0">
+<net name="GND" class="0">
 <segment>
 <pinref part="JP1" gate="A" pin="1"/>
 <wire x1="287.02" y1="0" x2="248.92" y2="0" width="0.1524" layer="91"/>
