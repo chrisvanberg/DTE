@@ -74,8 +74,8 @@ void main()
 
       // receives treshold from JAVA interface
       char *treshstr = gets(); // string treshold from JAVA
-      strtok(tempstr, ':'); // first part (DTE.tresh)
-      int treshold = atoi(strtok(tempstr, ':')); // second part + parse int (ex: 25)
+      strtok(treshstr, ':'); // first part (DTE.tresh)
+      int treshold = atoi(strtok(treshstr, ':')); // second part + parse int (ex: 25)
 
       // Check temp level
       checkLed(temperature, treshold);
