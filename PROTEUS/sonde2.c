@@ -58,6 +58,7 @@ void main()
    setup_low_volt_detect(FALSE);
 
    int temperature;
+   // only sends treshold at start
    printf("DTE.tresh:%d\n", TRESHOLD);
 
    delay_ms(10);
@@ -68,11 +69,13 @@ void main()
       // And convert it to a range from 0 to 100 (�C)
       // 0.48 => (5 / 1023) * 100
       temperature = read_adc() * CONV_CST;
-      printf("DTE.temp:%d\n", temperature);
+      // sends the temperature to JAVA interface forever 
+      printf("DTE.tresh:%d\n", temperature);
 
+      // receives treshold from JAVA interface
       char *treshstr = gets(); // string treshold from JAVA
-      strtok(tempstr, ':'); // first part
-      int treshold = atoi(strtok(tempstr, ':')); // second part + parse int 
+      strtok(tempstr, ':'); // first part (DTE.tresh)
+      int treshold = atoi(strtok(tempstr, ':')); // second part + parse int (ex: 25)
 
       // Check temp level
       checkLed(temperature, treshold);
