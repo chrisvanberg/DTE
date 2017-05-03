@@ -9,7 +9,6 @@
 #define GREEN_LED PIN_C0
 #define RED_LED PIN_C1
 
-
 int simpleBCDConverter(value) {
    // Shift tens from 4 bits to the left
    // So we have ([Tens] [Unity]) XXXX XXXX
@@ -22,28 +21,25 @@ int simpleBCDConverter(value) {
 void bitsToBCD(int value) {
    int tens = value / 10 % 10;
    int unity = value % 10;
-   
+
    output_d(tens);
    output_high(TENS_DISPLAY);
    output_low(UNITY_DISPLAY);
    delay_ms(10);
-   
+
    output_d(unity);
    output_low(TENS_DISPLAY);
    output_high(UNITY_DISPLAY);
-   
-   
-   
    delay_ms(10);
 }
 
 /**
  * Check temp level, and switch on the right led
  */
-void checkLed(int temp) {
+void checkLed(int temp, int treshold) {
    // If temps is greater than treshold
    // Blinking Red LED with 555 (astable)
-   if (temp > TRESHOLD) {
+   if (temp >= treshold) {
       output_low(GREEN_LED);
       output_high(RED_LED);
    } else { // Otherwise, green LED
@@ -54,25 +50,32 @@ void checkLed(int temp) {
 void main()
 {
    setup_adc_ports(AN0);
-   set_adc_channel(0); // A0 connecté à l'entrée analogique
+   set_adc_channel(0); // A0 connectï¿½ ï¿½ l'entrï¿½e analogique
    setup_adc(ADC_CLOCK_INTERNAL);
    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1|RTCC_8_BIT); // 51,2 us overflow
    setup_timer_1(T1_INTERNAL|T1_DIV_BY_1); //13,1 ms overflow
-   
+
    setup_low_volt_detect(FALSE);
-   
+
    int temperature;
+   printf("DTE.tresh:%d\n", TRESHOLD);
+
    delay_ms(10);
-   
+
    while(TRUE) {
       //delay_ms(10);
       // Read the value from A/N converter (10bits [0 => 1023])
-      // And convert it to a range from 0 to 100 (°C)
+      // And convert it to a range from 0 to 100 (ï¿½C)
       // 0.48 => (5 / 1023) * 100
       temperature = read_adc() * CONV_CST;
-      printf("%d",temperature);
+      printf("DTE.temp:%d\n", temperature);
+
+      char *treshstr = gets(); // string treshold from JAVA
+      strtok(tempstr, ':'); // first part
+      int treshold = atoi(strtok(tempstr, ':')); // second part + parse int 
+
       // Check temp level
-      checkLed(temperature);
+      checkLed(temperature, treshold);
 
       // Convert bits to BCD
       // And show temp on 7 segment displays
