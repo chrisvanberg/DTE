@@ -1,7 +1,6 @@
 #include <sonde2.h>
 #include <math.h>
-#include <string.h>
-#include <stdlib.h>
+#include <string.h>
 #include <LCD.c>
 
 #define CONV_CST 0.48875855327
@@ -61,7 +60,7 @@ void main()
    int temperature;
    int treshld;
    char *treshstr;
-   char *delimiter = ":";
+   char delimiter[] = ":";
    
    // only sends treshold at start
    printf("DTE.tresh:%d\n", TRESHOLD);
@@ -79,7 +78,7 @@ void main()
 
       // receives treshold from JAVA interface
       gets(treshstr); // read string from rs232 (STDIN)
-      strtok(treshstr, delimiter); // first part (DTE.tresh)
+      strtok(treshld, delimiter); // first part (DTE.tresh)
       treshld = atoi(strtok(treshstr, delimiter)); // second part + parse int (ex: 25)
 
       // Check temp level
