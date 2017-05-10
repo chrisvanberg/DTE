@@ -56,7 +56,7 @@ public class DTE {
         gui.addObservable(model);
         cli.addObservable(model);
 
-        cli.draw();
+        //cli.draw();
         gui.setVisible(true);
 
     }
