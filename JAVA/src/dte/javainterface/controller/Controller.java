@@ -25,8 +25,6 @@ package dte.javainterface.controller;
 
 import dte.javainterface.model.Model;
 import dte.javainterface.view.View;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Controller of the App. Manage all the functionalities

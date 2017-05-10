@@ -58,6 +58,7 @@ public class DTE {
 
         //cli.draw();
         gui.setVisible(true);
+        gui.update(null, null);
 
     }
 

@@ -26,7 +26,9 @@ package dte.javainterface.model;
 import dte.javainterface.exceptions.EmptyHistoryException;
 import dte.javainterface.exceptions.NoHistoryDataAvaliableException;
 import dte.javainterface.exceptions.UnknowAlertLevelException;
+import gnu.io.CommPortIdentifier;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.Observable;
 import java.util.logging.Level;
@@ -40,6 +42,9 @@ public class Model extends Observable {
     private int currentTemperature;
     private int thresholdTemperature;
     private int alertLevel;
+    private boolean connected;
+    CommPortIdentifier serialPortId;
+    private Enumeration enumComm;
     
     private LinkedHashMap<Date, Integer> temperaturesHistory;
     private LinkedHashMap<Date, Integer> alertLevelHistory;
@@ -79,6 +84,8 @@ public class Model extends Observable {
         this.alertLevel = -1000;
         this.temperaturesHistory = new LinkedHashMap<Date, Integer>();
         this.alertLevelHistory = new LinkedHashMap<Date, Integer>();
+        this.connected = false;
+        this.enumComm = CommPortIdentifier.getPortIdentifiers();
     }
     
     /**
@@ -98,6 +105,7 @@ public class Model extends Observable {
         this.alertLevel = alertLevel;
         this.temperaturesHistory = new LinkedHashMap<Date, Integer>();
         this.alertLevelHistory = new LinkedHashMap<Date, Integer>();
+        this.connected = false;
 
         //Update of the temperature & alertLevel
         this.addTemperatureToHistory(this.currentTemperature);
@@ -115,6 +123,7 @@ public class Model extends Observable {
         this.alertLevel = currentTemperature<thresholdTemperature ? 1 : 3;
         this.temperaturesHistory = new LinkedHashMap<Date, Integer>();
         this.alertLevelHistory = new LinkedHashMap<Date, Integer>();
+        this.connected = false;
         
         try {
             this.addAlertLevelToHistory(this.alertLevel);
@@ -123,6 +132,32 @@ public class Model extends Observable {
         }
     }
 
+    public boolean isConnected() {
+        return connected;
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
+    }
+
+    public CommPortIdentifier getSerialPortId() {
+        return serialPortId;
+    }
+
+    public void setSerialPortId(CommPortIdentifier serialPortId) {
+        this.serialPortId = serialPortId;
+    }
+
+    public Enumeration getEnumComm() {
+        return enumComm;
+    }
+
+    public void setEnumComm(Enumeration enumComm) {
+        this.enumComm = enumComm;
+    }
+
+    
+    
     /**
      * Get the currentTemperature
      * @return int currentTemperature

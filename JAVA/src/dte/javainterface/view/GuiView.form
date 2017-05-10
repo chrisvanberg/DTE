@@ -117,36 +117,38 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="currentTempLabal" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="currentTemperature" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="alertLevelLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="alertLevel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="statusLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                           <Component id="status" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="currentTempLabal" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="currentTemperature" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="alertLevelLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="alertLevel" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="95" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="comBox" max="32767" attributes="0"/>
                               <Component id="newThresold" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="comButton" pref="89" max="32767" attributes="0"/>
+                              <Component id="newThresoldButton" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                  </Group>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="comButton" pref="89" max="32767" attributes="0"/>
-                      <Component id="jToggleButton1" max="32767" attributes="0"/>
+                      <Component id="alertLabel" min="-2" pref="171" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -167,12 +169,13 @@
                       <Component id="alertLevelLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="alertLevel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="newThresold" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jToggleButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="newThresoldButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="statusLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="status" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="alertLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
               </Group>
@@ -244,13 +247,18 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newThresoldActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton1">
+        <Component class="javax.swing.JToggleButton" name="newThresoldButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Apply"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newThresoldButtonActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="alertLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="New thresold applied"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

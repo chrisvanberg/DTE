@@ -25,6 +25,8 @@ package dte.javainterface.view;
 
 import dte.javainterface.controller.Controller;
 import dte.javainterface.model.Model;
+import gnu.io.CommPortIdentifier;
+import java.awt.Color;
 import java.util.Observable;
 
 /**
@@ -37,6 +39,7 @@ public class GuiView extends View {
      */
     public GuiView() {
         initComponents();
+        alertLabel.setVisible(false);
     }
 
     /**
@@ -48,6 +51,7 @@ public class GuiView extends View {
     public GuiView(Controller controller, Model model) {
         super(controller, model);
         initComponents();
+        alertLabel.setVisible(false);
 
     }
 
@@ -60,6 +64,47 @@ public class GuiView extends View {
     @Override
     public void update(Observable o, Object arg) {
 
+        if (super.model.isConnected()) {
+            newThresold.setEnabled(true);
+            newThresoldButton.setEnabled(false);
+            comBox.setEnabled(false);
+            comButton.setEnabled(false);
+            status.setForeground(Color.GREEN);
+            status.setText("Connected");
+
+            if (super.model.getCurrentTemperature() == -1000) {
+                currentTemperature.setText("N/A");
+            } else {
+                currentTemperature.setText(String.valueOf(super.model.getCurrentTemperature()));
+            }
+            if (super.model.getAlertLevel() == -1000) {
+                alertLevel.setText("N/A");
+            } else {
+                alertLevel.setText(String.valueOf(super.model.getAlertLevel()));
+            }
+
+        } else {
+            status.setForeground(Color.RED);
+            status.setText("Disconnected");
+            comBox.setEnabled(true);
+            comButton.setEnabled(true);
+            
+            currentTemperature.setText("N/A");
+            newThresoldButton.setEnabled(false);
+            newThresold.setEnabled(false);
+            alertLevel.setText("N/A");
+            
+            while(this.model.getEnumComm().hasMoreElements())
+		{
+			this.model.setSerialPortId((CommPortIdentifier)this.model.getEnumComm().nextElement());
+			if(this.model.getSerialPortId().getPortType() == CommPortIdentifier.PORT_SERIAL)
+			{
+			alertLabel.setText(this.model.getSerialPortId().getName());
+			}
+		}
+            
+            
+        }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
             }
@@ -85,7 +130,8 @@ public class GuiView extends View {
         comBox = new javax.swing.JComboBox<>();
         comButton = new javax.swing.JToggleButton();
         newThresold = new javax.swing.JTextField();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        newThresoldButton = new javax.swing.JToggleButton();
+        alertLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
@@ -135,12 +181,14 @@ public class GuiView extends View {
             }
         });
 
-        jToggleButton1.setText("Apply");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        newThresoldButton.setText("Apply");
+        newThresoldButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                newThresoldButtonActionPerformed(evt);
             }
         });
+
+        alertLabel.setText("New thresold applied");
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -149,29 +197,30 @@ public class GuiView extends View {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(mainPanelLayout.createSequentialGroup()
+                            .addComponent(currentTempLabal)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(currentTemperature))
+                        .addGroup(mainPanelLayout.createSequentialGroup()
+                            .addComponent(alertLevelLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(alertLevel)))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(statusLabel)
                         .addGap(46, 46, 46)
-                        .addComponent(status)
-                        .addGap(177, 177, 177))
+                        .addComponent(status)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(currentTempLabal)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(currentTemperature))
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(alertLevelLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(alertLevel)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(comBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(newThresold))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(comButton, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(comButton, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                            .addComponent(newThresoldButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(alertLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
@@ -188,11 +237,12 @@ public class GuiView extends View {
                     .addComponent(alertLevelLabel)
                     .addComponent(alertLevel)
                     .addComponent(newThresold, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton1))
+                    .addComponent(newThresoldButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(statusLabel)
-                    .addComponent(status))
+                    .addComponent(status)
+                    .addComponent(alertLabel))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -276,12 +326,13 @@ public class GuiView extends View {
         // TODO add your handling code here:
     }//GEN-LAST:event_newThresoldActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void newThresoldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newThresoldButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_newThresoldButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
+    private javax.swing.JLabel alertLabel;
     private javax.swing.JLabel alertLevel;
     private javax.swing.JLabel alertLevelLabel;
     private javax.swing.JComboBox<String> comBox;
@@ -296,10 +347,10 @@ public class GuiView extends View {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JTextField newThresold;
+    private javax.swing.JToggleButton newThresoldButton;
     private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JLabel status;
     private javax.swing.JLabel statusLabel;
