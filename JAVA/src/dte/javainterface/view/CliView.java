@@ -25,6 +25,8 @@ package dte.javainterface.view;
 
 import dte.javainterface.controller.Controller;
 import dte.javainterface.model.Model;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Observable;
 
 /**
@@ -32,6 +34,7 @@ import java.util.Observable;
  */
 public class CliView extends View {
 
+    static int nbUpdate = 1;
     /**
      * View's constructor with a Controller and a Model
      *
@@ -57,7 +60,10 @@ public class CliView extends View {
      * Draw the view on the standart output
      */
     public void draw() {
-        
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        System.out.println(sdf.format(cal.getTime())+": CLI Update ("+nbUpdate+") triggered ! : "+super.model.toString());
+        nbUpdate += 1;
     }
 
 }
