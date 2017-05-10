@@ -235,15 +235,16 @@ public class ModelTest extends TestCase {
         System.out.println("getTemperatureFromHistory");
         Date date = new Date();
         Model instance = new Model(15, 20);
-        int expResult = 15;
-        int result;
-        try {
-            result = instance.getTemperatureFromHistory(date);
-            assertEquals(expResult, result);
-        } catch (NoHistoryDataAvaliableException ex) {
-            fail("Should not have thrown an NoTemperatureAvaliableException");
-        }
 
+        instance.addTemperatureToHistory(date, 25);
+        
+        try {
+           assertEquals(instance.getTemperatureFromHistory(date), 25);
+        } catch (NoHistoryDataAvaliableException ex) {
+            Logger.getLogger(ModelTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         instance = new Model();
 
         try {
@@ -282,10 +283,8 @@ public class ModelTest extends TestCase {
             try {
                 instance.addAlertLevelToHistory(i);
             } catch (UnknowAlertLevelException ex) {
-                if (MIN_ALERT_LVL <= i && i <= MAX_ALERT_LVL) {
-                    fail("Should not have thrown an UnknowAlertLevelException");
-                } else {
-                    fail("Should have thrown an UnknowAlertLevelException");
+                if (instance.isAlertLevelCorrect(i)) {
+                    fail("Should not have thrown an UnknowAlertLevelException"+"Message:"+i);
                 }
             }
         }
@@ -354,12 +353,20 @@ public class ModelTest extends TestCase {
 
             try {
                 LinkedHashMap<Date, Integer> history = instance.getAlertLevelHistory();
-                Date theLastEntry = new ArrayList<>(history.keySet()).get(history.size() - 1);
+               
+                Date theLastEntry = null;
+      for(Date key : history.keySet()){
+        theLastEntry = key;
+      }
+                try{
                 try {
                     result = instance.getAlertLevelFromHistory(theLastEntry);
                     assertEquals(expResult, result);
                 } catch (NoHistoryDataAvaliableException ex) {
                     fail("Should not have thrown an NoHistoryDataAvaliableException");
+                }}
+                catch (NullPointerException ex){
+                    fail("Should not have thrown a nullPointerException");
                 }
 
                 instance = new Model();
