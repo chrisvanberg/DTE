@@ -33,7 +33,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Model of the App, contain all the data.a
+ * Model of the App, contain all the data
  */
 public class Model extends Observable {
 
@@ -195,7 +195,7 @@ public class Model extends Observable {
      */
     public final void addAlertLevelToHistory(int alertLevel) throws UnknowAlertLevelException {
         if(isAlertLevelCorrect(alertLevel)){
-        this.temperaturesHistory.put(new Date(), alertLevel);
+        this.alertLevelHistory.put(new Date(), alertLevel);
         }
         else{
             throw new UnknowAlertLevelException(alertLevel);
@@ -210,7 +210,9 @@ public class Model extends Observable {
      */
     public final void addAlertLevelToHistory(Date date,int alertLevel) throws UnknowAlertLevelException {
         if(isAlertLevelCorrect(alertLevel)){
-        this.temperaturesHistory.put(date, alertLevel);
+            
+        this.alertLevelHistory.put(date, alertLevel);
+        
         }
         else{
             throw new UnknowAlertLevelException(alertLevel);
@@ -224,7 +226,9 @@ public class Model extends Observable {
      * @throws NoHistoryDataAvaliableException when there is no entry at the given date
      */
     public int getAlertLevelFromHistory(Date date) throws NoHistoryDataAvaliableException{
+        
         if(this.alertLevelHistory.get(date)!=null){
+            
             return this.alertLevelHistory.get(date);
         }
         else{
@@ -285,6 +289,13 @@ public class Model extends Observable {
         return MIN_ALERT_LVL<=alertLevel && alertLevel<=MAX_ALERT_LVL;
         
     }
+
+    @Override
+    public String toString() {
+        return "Model{" + "currentTemperature=" + currentTemperature + ", thresholdTemperature=" + thresholdTemperature + ", alertLevel=" + alertLevel + ", temperaturesHistory=" + temperaturesHistory + ", alertLevelHistory=" + alertLevelHistory + '}';
+    }
+    
+    
 }
 
 
