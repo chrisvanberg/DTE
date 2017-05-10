@@ -94,12 +94,13 @@ public class GuiView extends View {
             newThresold.setEnabled(false);
             alertLevel.setText("N/A");
             
+            
             while(this.model.getEnumComm().hasMoreElements())
 		{
 			this.model.setSerialPortId((CommPortIdentifier)this.model.getEnumComm().nextElement());
 			if(this.model.getSerialPortId().getPortType() == CommPortIdentifier.PORT_SERIAL)
 			{
-			alertLabel.setText(this.model.getSerialPortId().getName());
+			comBox.addItem(this.model.getSerialPortId().getName());
 			}
 		}
             
@@ -158,7 +159,6 @@ public class GuiView extends View {
 
         status.setText("Disconected");
 
-        comBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COM1", "COM2" }));
         comBox.setToolTipText("");
         comBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
