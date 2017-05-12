@@ -189,7 +189,7 @@ D9_E=14
 D9_D=0
 D9_L6=[63741]Project Closed.
 D10=12-05-2017
-D10_L=7
+D10_L=8
 D10_L1=[47657]Project Opened.
 D10_L2=[48473]Started Editing.
 D10_L3=[48789]Stopped Editing.
@@ -197,18 +197,19 @@ D10_L4=[48895]Started Editing.
 D10_L5=[49446]Stopped Editing.
 D10_L6=[49447]Project Closed.
 D10_L7=[56815]Project Opened.
+D10_L8=[57221]Started Editing.
 
 [Opened Files]
 1=sonde2.c
-t1=1
-Count=1
-2=..\..\..\..\Desktop\Electro\PROTEUS\sonde2.h
+t1=53
+Count=2
+2=sonde2.h
 t2=1
 [sonde2.c]
 Type=4
 
 [defines]
-buildcount=170
+buildcount=171
 [C:\Users\Math\Documents\Lab\DTE\sonde2]
 Type=4
 [Units]

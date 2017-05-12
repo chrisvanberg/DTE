@@ -5,55 +5,52 @@
 003     @SCRATCH
 004-005 strtok.save
 006-009 _Randseed
-00A-00B @sprintf_string
-00C-00F atan2.y
-00C     MAIN.temperature
-00D     MAIN.treshld
-00E-017 MAIN.treshstr
-010-013 atan2.x
-014-017 atan2.z
-018.0   atan2.sign
-018     @PRINTF_D_9600_31766_31767.P1
-018-01B @SFTOI.P2
-018-019 atoi.s
-018     @PSTRINGCN_9600_31766_31767.P1
-018     checkLed.temp
-018     bitsToBCD.value
-018     MAIN.@SCRATCH1
-018     @PSTRINGR_9600_31766_31767.@SCRATCH1
-019     atan2.quad
-019     bitsToBCD.tens
-019     checkLed.treshld
-019     @PRINTF_D_9600_31766_31767.P1
-019     MAIN.@SCRATCH2
-019     @PSTRINGCN_9600_31766_31767.@SCRATCH1
-019     @PSTRINGR_9600_31766_31767.@SCRATCH2
-01A-01D @MULFF.P1
-01A     bitsToBCD.unity
-01A     atoi.result
-01A-01B @ITOF.P1
-01A     @PSTRINGCN_9600_31766_31767.@SCRATCH2
-01A     @PRINTF_D_9600_31766_31767.@SCRATCH1
-01B     @delay_ms1.P1
-01B     atoi.sign
-01B     bitsToBCD.@SCRATCH1
-01B     @PRINTF_D_9600_31766_31767.@SCRATCH2
-01C     atoi.base
-01C     @PRINTF_D_9600_31766_31767.@SCRATCH3
-01D     atoi.index
-01D     @PRINTF_D_9600_31766_31767.@SCRATCH4
-01E     atoi.c
-01E     @DIV88.P1
-01E-021 @MULFF.P2
-01F     @DIV88.P1
-01F     @MUL88.P2
-01F     atoi.@SCRATCH1
-020     @MUL88.P1
-020     atoi.@SCRATCH2
-020     @DIV88.@SCRATCH1
-022     @MULFF.@SCRATCH1
-023     @MULFF.@SCRATCH2
-024     @MULFF.@SCRATCH3
+00A     MAIN.temperature
+00A-00D atan2.y
+00B     MAIN.treshld
+00C-015 MAIN.treshstr
+00E-011 atan2.x
+012-015 atan2.z
+016-019 @SFTOI.P1
+016.0   atan2.sign
+016-017 atoi.s
+016     @PSTRINGCN_9600_31766_31767.P1
+016     checkLed.temp
+016     @PRINTF_D_9600_31766_31767.P1
+016     bitsToBCD.value
+016     MAIN.@SCRATCH1
+017     @PRINTF_D_9600_31766_31767.P1
+017     atan2.quad
+017     checkLed.treshld
+017     bitsToBCD.tens
+017     MAIN.@SCRATCH2
+017     @PSTRINGCN_9600_31766_31767.@SCRATCH1
+018-01B @MULFF.P1
+018     bitsToBCD.unity
+018-019 @ITOF.P1
+018     atoi.result
+018     @PSTRINGCN_9600_31766_31767.@SCRATCH2
+018     @PRINTF_D_9600_31766_31767.@SCRATCH1
+019     atoi.sign
+019     @delay_ms1.P1
+019     bitsToBCD.@SCRATCH1
+019     @PRINTF_D_9600_31766_31767.@SCRATCH2
+01A     atoi.base
+01A     @PRINTF_D_9600_31766_31767.@SCRATCH3
+01B     atoi.index
+01B     @PRINTF_D_9600_31766_31767.@SCRATCH4
+01C     atoi.c
+01C-01F @MULFF.P1
+01C     @DIV88.P2
+01D     @MUL88.P1
+01D     @DIV88.P2
+01D     atoi.@SCRATCH1
+01E     @MUL88.P1
+01E     atoi.@SCRATCH2
+01E     @DIV88.@SCRATCH1
+020     @MULFF.@SCRATCH1
+021     @MULFF.@SCRATCH2
+022     @MULFF.@SCRATCH3
 F83     lcd
 F83     PSP_DATA
 F8C     lcdlat
@@ -66,35 +63,32 @@ FBC     CCP_2_HIGH
 FBE     CCP_1_LOW
 FBE     CCP_1
 FBF     CCP_1_HIGH
-FE1-FE2 @WRITE_PACKED_MEMORY.P1
-FE1-FE2 @READ_PACKED_MEMORY.P2
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
 FE9-FEA @READ_PACKED_MEMORY.P1
 FE9-FEA @WRITE_PACKED_MEMORY.P2
-FE9-FEA @WRITE_PROGRAM_MEMORY.P3
-FE9-FEA @READ_PROGRAM_MEMORY.P4
+FE9-FEA @READ_PROGRAM_MEMORY.P3
+FE9-FEA @WRITE_PROGRAM_MEMORY.P4
 FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
 FF6-FF8 @READ_PROGRAM_MEMORY.P2
 
 ROM Allocation:
 000004  @const1078.call
-000012  @const1084.call
-000020  @const1085.call
-000036  @const1086.call
-00004C  @PSTRINGCN_9600_31766_31767
-00006C  @DIV88
-000094  @PRINTF_D_9600_31766_31767
-000146  @delay_ms1
-00016C  @ITOF
-0001A4  @MULFF
-000298  @SFTOI
-0002D2  checkLed
-0002EA  bitsToBCD
-00033C  @PSTRINGR_9600_31766_31767
-000364  @MUL88
-0003B0  atoi
-00053C  @cinit1
-00053C  MAIN
-00055C  @cinit2
+000014  @const1084.call
+000022  @PSTRINGCN_9600_31766_31767
+000042  @DIV88
+00006A  @PRINTF_D_9600_31766_31767
+00011C  @delay_ms1
+000142  @ITOF
+00017A  @MULFF
+00026E  @SFTOI
+0002A8  checkLed
+0002C0  bitsToBCD
+000312  @MUL88
+00035E  atoi
+0004EA  MAIN
+0004EA  @cinit1
+000506  @cinit2
 0136  StrtoulGO
 0136  StrtolGO
 
@@ -102,7 +96,7 @@ Project Directory:
     C:\Users\Mathieu\Documents\Lab\DTE\PROTEUS\
 
 Project Files:
-    sonde2.c                                                [12-mai-17 15:43  CRC=BD40D6A5]
+    sonde2.c                                                [12-mai-17 15:54  CRC=F5427D7C]
     sonde2.h                                                [12-mai-17 15:43  CRC=D872A938]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F458.h [21-nov.-16 15:45  CRC=8BC8FD78]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h [22-sept.-16 08:36  CRC=9CF8C837]
@@ -112,10 +106,10 @@ Project Files:
     ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h [29-juin-16 09:34  CRC=7E9CC16B]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\LCD.c [22-févr.-16 09:05  CRC=D1A6378A]
 
-Source signature=5B7BA6AD
+Source signature=937D4D84
 Program memory checksum=0000
 Program memory CRC=0000
-Hex file CRC=02D6
+Hex file CRC=B08C
 
 Units:
     sonde2 (main)

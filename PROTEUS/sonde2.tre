@@ -1,5 +1,5 @@
 ÀÄsonde2
-   ÀÄMAIN  0/376  Ram=14
+   ÀÄMAIN  0/302  Ram=14
       ÃÄ@cinit1  (Inline)  Ram=0
       ÃÄ@PSTRINGCN_9600_31766_31767  0/32  Ram=3
       ÃÄ@PRINTF_D_9600_31766_31767  0/178  Ram=6
@@ -19,10 +19,5 @@
       ÃÄ@PSTRINGCN_9600_31766_31767  0/32  Ram=3
       ÃÄ@PRINTF_D_9600_31766_31767  0/178  Ram=6
       ³  ÀÄ*
-      ÃÄ@PSTRINGCN_9600_31766_31767  0/32  Ram=3
-      ÃÄ@PRINTF_D_9600_31766_31767  0/178  Ram=6
-      ³  ÀÄ*
-      ÃÄ@PSTRINGCN_9600_31766_31767  0/32  Ram=3
-      ÃÄ@PSTRINGR_9600_31766_31767  0/40  Ram=2
       ÀÄatoi  0/396  Ram=9
          ÀÄ@MUL88  0/76  Ram=2

@@ -62,7 +62,7 @@ void main()
    char treshstr[10];
    
    // only sends treshold at start
-   printf("DTE.tresh:%d\n", treshld);
+   printf("DTE.tresh:%d\r\n", treshld);
 
    delay_ms(10);
 
@@ -82,13 +82,13 @@ void main()
       
       // sends the temperature to JAVA interface forever
       printf("DTE.temp:%d\r\n", temperature);
-      printf("treshold update: %d\r\n", treshld);
+      //printf("treshold update: %d\r\n", treshld);
 
       // receives treshold from JAVA interface
       gets(treshstr); // read string from rs232 (STDIN)
       //treshstr = "30"; // prove that the problem seems to come from the terminal emulator
       
-      printf("treshold string: %s\r\n", treshstr);
+      //printf("treshold string: %s\r\n", treshstr);
       treshld = atoi(treshstr);
    }
 }
