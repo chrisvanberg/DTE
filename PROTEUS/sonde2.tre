@@ -1,5 +1,5 @@
 ÀÄsonde2
-   ÀÄMAIN  0/342  Ram=10
+   ÀÄMAIN  0/376  Ram=14
       ÃÄ@cinit1  (Inline)  Ram=0
       ÃÄ@PSTRINGCN_9600_31766_31767  0/32  Ram=3
       ÃÄ@PRINTF_D_9600_31766_31767  0/178  Ram=6
@@ -9,21 +9,20 @@
       ÃÄ@ITOF  0/56  Ram=2
       ÃÄ@MULFF  0/244  Ram=11
       ÃÄ@SFTOI  0/58  Ram=4
+      ÃÄcheckLed  0/24  Ram=2
+      ÃÄbitsToBCD  0/82  Ram=4
+      ³  ÃÄ@DIV88  0/40  Ram=3
+      ³  ÃÄ@DIV88  0/40  Ram=3
+      ³  ÃÄ@DIV88  0/40  Ram=3
+      ³  ÃÄ@delay_ms1  0/38  Ram=1
+      ³  ÀÄ@delay_ms1  0/38  Ram=1
       ÃÄ@PSTRINGCN_9600_31766_31767  0/32  Ram=3
       ÃÄ@PRINTF_D_9600_31766_31767  0/178  Ram=6
       ³  ÀÄ*
-      ÃÄstrtok  0/168  Ram=10
-      ³  ÃÄstrspn  0/136  Ram=9
-      ³  ÃÄstrpbrk  0/114  Ram=9
-      ³  ÀÄstrlen  0/54  Ram=5
-      ÃÄstrtok  0/168  Ram=10
+      ÃÄ@PSTRINGCN_9600_31766_31767  0/32  Ram=3
+      ÃÄ@PRINTF_D_9600_31766_31767  0/178  Ram=6
       ³  ÀÄ*
-      ÃÄatoi  0/396  Ram=9
-      ³  ÀÄ@MUL88  0/76  Ram=2
-      ÃÄcheckLed  0/24  Ram=2
-      ÀÄbitsToBCD  0/82  Ram=4
-         ÃÄ@DIV88  0/40  Ram=3
-         ÃÄ@DIV88  0/40  Ram=3
-         ÃÄ@DIV88  0/40  Ram=3
-         ÃÄ@delay_ms1  0/38  Ram=1
-         ÀÄ@delay_ms1  0/38  Ram=1
+      ÃÄ@PSTRINGCN_9600_31766_31767  0/32  Ram=3
+      ÃÄ@PSTRINGR_9600_31766_31767  0/40  Ram=2
+      ÀÄatoi  0/396  Ram=9
+         ÀÄ@MUL88  0/76  Ram=2

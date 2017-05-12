@@ -1,19 +1,19 @@
 
-ROM used:   2070/32768 (6%)
-            2070/32768 (6%) including unused fragments
+ROM used:   1716/32768 (5%)
+            1716/32768 (5%) including unused fragments
 
-            0.4 Average locations per line
-            2.8 Average locations per statement
+            0.3 Average locations per line
+            2.3 Average locations per statement
 
-RAM used:   20/1536 (1%) at main() level
-            35/1536 (2%) worst case
+RAM used:   26/1536 (2%) at main() level
+            37/1536 (2%) worst case
 
 Stack used: 0 worst case (0 in main + 0 for interrupts)
 Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-   94    33   4  sonde2.c
+   95    34   5  sonde2.c
     6     0   0  sonde2.h
   785     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F458.h
  2227   258  35  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
@@ -23,46 +23,45 @@ Lines Stmts  %   Files
  1352   359  49  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
   456    84  11  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\LCD.c
 ----- -----
- 5415   734 Total
+ 5416   735 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
 0     38   1    1             @delay_ms1
-0     58   1    4             @SFTOI
-0     56   1    2             @ITOF
-0    244   6   11             @MULFF
-0    114   3    9    305  6.5  strpbrk
-0    136   3    9    365  8.1  strspn
-0     54   1    5    140  5.0  strlen
-0    168   4   10    516  8.6  strtok
-0     76   2    2    179  3.3  @MUL88
-0    396  10    9   1815 10.5  atoi
-0     40   1    3             @DIV88
+0     58   2    4             @SFTOI
+0     56   2    2             @ITOF
+0    244   7   11             @MULFF
+0     76   2    2    592 10.0  @MUL88
+0    396  12    9   1815 10.5  atoi
+0     40   1    3    814  7.2  @DIV88
 0     82   2    4    262  3.0  bitsToBCD
 0     24   1    2    117  3.2  checkLed
-0    342   8   10    623  3.8  MAIN
-0     14   0    0             @const1080
-0     32   1    3             @PSTRINGCN_9600_31766_31767
-0    178   4    6             @PRINTF_D_9600_31766_31767
-0     14   0    0             @const1086
+0    376  11   14    622  4.3  MAIN
+0     14   0    0    267  6.8  @const1078
+0     32   1    3    100  1.6  @PSTRINGCN_9600_31766_31767
+0    178   5    6     74  3.1  @PRINTF_D_9600_31766_31767
+0     14   0    0             @const1084
+0     22   1    0    262  3.0  @const1085
+0     22   1    0    117  3.2  @const1086
+0     40   1    2             @PSTRINGR_9600_31766_31767
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               9
-    Statements              734
-    Comments                1041
-    Volume (V)              6390
-    Difficulty (D)          49.9
-    Effort to implement (E) 318748
-    Time to implement (T)   4 hours, 55 minutes
+    Functions               11
+    Statements              735
+    Comments                1040
+    Volume (V)              7599
+    Difficulty (D)          55.6
+    Effort to implement (E) 422802
+    Time to implement (T)   6 hours, 31 minutes
     Est Delivered Bugs (B)  2
     Cyclomatic Complexity   20
-    Maintainability (MI)    24
+    Maintainability (MI)    99
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
-00004-07FFE  2066  30698  
+00004-07FFE  1712  31052  
 
 
 
