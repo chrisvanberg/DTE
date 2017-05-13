@@ -26,8 +26,14 @@ package dte.javainterface.view;
 import dte.javainterface.controller.Controller;
 import dte.javainterface.model.Model;
 import gnu.io.CommPortIdentifier;
+import gnu.io.NoSuchPortException;
+import gnu.io.PortInUseException;
+import gnu.io.UnsupportedCommOperationException;
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Graphical interface of the App
@@ -101,7 +107,7 @@ public class GuiView extends View {
 			if(this.model.getSerialPortId().getPortType() == CommPortIdentifier.PORT_SERIAL)
 			{
                             //if(!this.model.getSerialPortId().getName().contains("Bluetooth")){
-                            System.out.println("Gello :"+this.model.getSerialPortId().getName());
+                            
 			comBox.addItem(this.model.getSerialPortId().getName());
                             //}
 			}
@@ -329,7 +335,9 @@ public class GuiView extends View {
     }//GEN-LAST:event_newThresoldActionPerformed
 
     private void comButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comButtonActionPerformed
-        // TODO add your handling code here:
+        
+            this.controller.connect(String.valueOf(comBox.getSelectedItem()));
+        
     }//GEN-LAST:event_comButtonActionPerformed
 
     private void comBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comBoxActionPerformed

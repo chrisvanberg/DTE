@@ -25,6 +25,13 @@ package dte.javainterface.controller;
 
 import dte.javainterface.model.Model;
 import dte.javainterface.view.View;
+import gnu.io.CommPortIdentifier;
+import gnu.io.NoSuchPortException;
+import gnu.io.PortInUseException;
+import gnu.io.SerialPort;
+import gnu.io.UnsupportedCommOperationException;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Controller of the App. Manage all the functionalities
@@ -51,4 +58,13 @@ public class Controller {
     public void addView(View view) {
         this.view = view;
     }
+    
+    public void connect(String selectedPortIdentifier){
+        //CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(selectedPortIdentifier);
+        //SerialPort serialPort = (SerialPort) portIdentifier.open("PIC", 0);
+        //serialPort.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+        
+        
+    }
+    
 }
