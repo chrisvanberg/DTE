@@ -69,7 +69,7 @@ public class DTE {
      * settings)
      */
     public static void main(String[] args) {
-
+        
         javax.swing.SwingUtilities.invokeLater(DTE::new);
 
     }
