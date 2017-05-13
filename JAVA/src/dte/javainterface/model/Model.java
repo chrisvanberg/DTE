@@ -157,7 +157,6 @@ public class Model extends Observable {
     }
 
     
-    
     /**
      * Get the currentTemperature
      * @return int currentTemperature

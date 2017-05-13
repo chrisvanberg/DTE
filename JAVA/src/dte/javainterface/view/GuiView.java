@@ -100,9 +100,10 @@ public class GuiView extends View {
 			this.model.setSerialPortId((CommPortIdentifier)this.model.getEnumComm().nextElement());
 			if(this.model.getSerialPortId().getPortType() == CommPortIdentifier.PORT_SERIAL)
 			{
-                            if(!this.model.getSerialPortId().getName().contains("Bluetooth")){
+                            //if(!this.model.getSerialPortId().getName().contains("Bluetooth")){
+                            System.out.println("Gello :"+this.model.getSerialPortId().getName());
 			comBox.addItem(this.model.getSerialPortId().getName());
-                            }
+                            //}
 			}
 		}
             
