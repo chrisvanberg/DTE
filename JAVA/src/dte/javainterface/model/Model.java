@@ -27,6 +27,8 @@ import dte.javainterface.exceptions.EmptyHistoryException;
 import dte.javainterface.exceptions.NoHistoryDataAvaliableException;
 import dte.javainterface.exceptions.UnknowAlertLevelException;
 import gnu.io.CommPortIdentifier;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
@@ -42,12 +44,19 @@ public class Model extends Observable {
     private int currentTemperature;
     private int thresholdTemperature;
     private int alertLevel;
-    private boolean connected;
-    CommPortIdentifier serialPortId;
-    private Enumeration enumComm;
     
     private LinkedHashMap<Date, Integer> temperaturesHistory;
     private LinkedHashMap<Date, Integer> alertLevelHistory;
+    
+    //Serial Communication
+    private boolean connected;
+    CommPortIdentifier serialPortId;
+    private Enumeration enumComm;
+    public static final int BAUDRATE = 9600;
+    private OutputStream uplink;
+    private InputStream downlink;
+    
+    
     
     /**
      * Represent the smallest alertLevel : {@value #MIN_ALERT_LVL}
@@ -132,12 +141,32 @@ public class Model extends Observable {
         }
     }
 
+    public OutputStream getUplink() {
+        return uplink;
+    }
+
+    public void setUplink(OutputStream uplink) {
+        this.uplink = uplink;
+    }
+
+    public InputStream getDownlink() {
+        return downlink;
+    }
+
+    public void setDownlink(InputStream downlink) {
+        this.downlink = downlink;
+    }
+
+    
+    
     public boolean isConnected() {
         return connected;
     }
 
     public void setConnected(boolean connected) {
         this.connected = connected;
+         this.setChanged();
+            this.notifyObservers();
     }
 
     public CommPortIdentifier getSerialPortId() {
@@ -172,6 +201,8 @@ public class Model extends Observable {
     public void setCurrentTemperature(int currentTemperature) {
         this.currentTemperature = currentTemperature;
         this.addTemperatureToHistory(currentTemperature);
+        this.setChanged();
+            this.notifyObservers();
     }
 
     /**
@@ -188,6 +219,8 @@ public class Model extends Observable {
      */
     public void setThresholdTemperature(int thresholdTemperature) {
         this.thresholdTemperature = thresholdTemperature;
+        this.setChanged();
+            this.notifyObservers();
     }
 
     /**
@@ -211,6 +244,8 @@ public class Model extends Observable {
         else{
             throw new UnknowAlertLevelException(alertLevel);
         }
+        this.setChanged();
+            this.notifyObservers();
     }
 
     /**

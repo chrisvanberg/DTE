@@ -72,7 +72,7 @@ public class GuiView extends View {
 
         if (super.model.isConnected()) {
             newThresold.setEnabled(true);
-            newThresoldButton.setEnabled(false);
+            newThresoldButton.setEnabled(true);
             comBox.setEnabled(false);
             comButton.setEnabled(false);
             status.setForeground(Color.GREEN);
@@ -81,7 +81,7 @@ public class GuiView extends View {
             if (super.model.getCurrentTemperature() == -1000) {
                 currentTemperature.setText("N/A");
             } else {
-                currentTemperature.setText(String.valueOf(super.model.getCurrentTemperature()));
+                currentTemperature.setText(String.valueOf(super.model.getCurrentTemperature())+"° C");
             }
             if (super.model.getAlertLevel() == -1000) {
                 alertLevel.setText("N/A");
@@ -217,9 +217,9 @@ public class GuiView extends View {
                             .addComponent(alertLevel)))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(statusLabel)
-                        .addGap(46, 46, 46)
+                        .addGap(37, 37, 37)
                         .addComponent(status)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -336,7 +336,7 @@ public class GuiView extends View {
 
     private void comButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comButtonActionPerformed
         
-            this.controller.connect(String.valueOf(comBox.getSelectedItem()));
+        this.controller.connect(String.valueOf(comBox.getSelectedItem()));
         
     }//GEN-LAST:event_comButtonActionPerformed
 
