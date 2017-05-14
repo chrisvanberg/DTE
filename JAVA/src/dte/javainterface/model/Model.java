@@ -55,8 +55,8 @@ public class Model extends Observable {
     CommPortIdentifier serialPortId;
     private Enumeration enumComm;
     public static final int BAUDRATE = 9600;
-    private OutputStream uplink;
-    private PrintWriter uplinkWriter;
+    private static OutputStream uplink;
+    private static PrintWriter uplinkWriter;
     
     private InputStream downlink;
 

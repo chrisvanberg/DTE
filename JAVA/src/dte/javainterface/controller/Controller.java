@@ -77,26 +77,27 @@ public class Controller {
             this.model.setUplinkWriter(new PrintWriter(this.model.getUplink()));
             
             
-            
             this.model.setConnected(true);
-            new Thread(new SerialReader(this.model.getDownlink(), this.model)).start();
             new Thread(new SerialWriter(this.model)).start();
+            new Thread(new SerialReader(this.model.getDownlink(), this.model)).start();
+            
         } catch (NoSuchPortException | PortInUseException | UnsupportedCommOperationException | IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private class SerialWriter implements Runnable {
-
-        
-        
+        Model model;
         public SerialWriter(Model model){
-          
+          this.model = model;
         }
         
         @Override
         public void run() {
-            
+            System.out.println("SET");
+				System.setProperty("line.separator","\r\n");
+				this.model.getUplinkWriter().write("Hello\r\n");
+				this.model.getUplinkWriter().flush();
         }
         
     }
