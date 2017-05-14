@@ -29,6 +29,7 @@ import dte.javainterface.exceptions.UnknowAlertLevelException;
 import gnu.io.CommPortIdentifier;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
@@ -55,6 +56,8 @@ public class Model extends Observable {
     private Enumeration enumComm;
     public static final int BAUDRATE = 9600;
     private OutputStream uplink;
+    private PrintWriter uplinkWriter;
+    
     private InputStream downlink;
 
     /**
@@ -147,6 +150,16 @@ public class Model extends Observable {
         }
     }
 
+    public PrintWriter getUplinkWriter() {
+        return uplinkWriter;
+    }
+
+    public void setUplinkWriter(PrintWriter uplinkWriter) {
+        this.uplinkWriter = uplinkWriter;
+    }
+
+    
+    
     public OutputStream getUplink() {
         return uplink;
     }
@@ -245,35 +258,32 @@ public class Model extends Observable {
             Date theLastEntry = new ArrayList<>(history.keySet()).get(history.size() - 2);
             lastTemperatureRecorded = getTemperatureFromHistory(theLastEntry);
             
-            
-            
-            
         } catch (EmptyHistoryException | NoHistoryDataAvaliableException | ArrayIndexOutOfBoundsException ex) {
             lastTemperatureRecorded = -1000;
         } finally {
         
-        if(currentTemperature>=thresholdTemperature){
+        if(currentTemperature>=thresholdTemperature && currentTemperature!= -1000 && thresholdTemperature != -1000){
             try {
                 setAlertLevel(ALERT_OVERHEATING);
             } catch (UnknowAlertLevelException ex) {
                 Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else if(currentTemperature<lastTemperatureRecorded){
+        else if(currentTemperature<lastTemperatureRecorded && currentTemperature!= -1000 && thresholdTemperature != -1000){
             try {
                 setAlertLevel(ALERT_COOLING);
             } catch (UnknowAlertLevelException ex) {
                 Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else if(currentTemperature>lastTemperatureRecorded){
+        else if(currentTemperature>lastTemperatureRecorded && currentTemperature!= -1000 && thresholdTemperature != -1000){
             try {
                 setAlertLevel(ALERT_HEATING);
             } catch (UnknowAlertLevelException ex) {
                 Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else {
+        else if (currentTemperature!= -1000 && thresholdTemperature != -1000) {
             try {
                 setAlertLevel(ALERT_IDLE);
             } catch (UnknowAlertLevelException ex) {
