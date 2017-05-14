@@ -50,4 +50,8 @@ public abstract class View extends javax.swing.JFrame implements Observer {
     public void addObservable(Observable observable) {
         observable.addObserver(this);
     }
+    
+    public void printAlertLevel(){
+        
+    }
 }

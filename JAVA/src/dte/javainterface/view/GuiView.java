@@ -25,6 +25,10 @@ package dte.javainterface.view;
 
 import dte.javainterface.controller.Controller;
 import dte.javainterface.model.Model;
+import static dte.javainterface.model.Model.ALERT_COOLING;
+import static dte.javainterface.model.Model.ALERT_HEATING;
+import static dte.javainterface.model.Model.ALERT_IDLE;
+import static dte.javainterface.model.Model.ALERT_OVERHEATING;
 import gnu.io.CommPortIdentifier;
 import gnu.io.NoSuchPortException;
 import gnu.io.PortInUseException;
@@ -34,6 +38,7 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /**
  * Graphical interface of the App
@@ -88,7 +93,13 @@ public class GuiView extends View {
             } else {
                 alertLevel.setText(String.valueOf(super.model.getAlertLevel()));
             }
-
+            if(this.model.getThresholdTemperature()==-1000){
+                newThresold.setText("");
+            }
+            else{
+            newThresold.setText(String.valueOf(this.model.getThresholdTemperature()));
+            }
+            printAlertLevel();
         } else {
             status.setForeground(Color.RED);
             status.setText("Disconnected");
@@ -121,6 +132,24 @@ public class GuiView extends View {
         });
     }
 
+    @Override
+    public void printAlertLevel(){
+        switch(this.model.getAlertLevel()){
+            case ALERT_COOLING:
+                alertLevel.setText("Cooling");
+                break;
+            case ALERT_IDLE:
+                alertLevel.setText("IDLE");
+                break;
+            case ALERT_HEATING:
+                alertLevel.setText("HEATING");
+                break;
+            case ALERT_OVERHEATING:
+                alertLevel.setText("OVERHEATING");
+                break;
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

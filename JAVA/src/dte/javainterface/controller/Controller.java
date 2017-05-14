@@ -31,8 +31,11 @@ import gnu.io.NoSuchPortException;
 import gnu.io.PortInUseException;
 import gnu.io.SerialPort;
 import gnu.io.UnsupportedCommOperationException;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -61,7 +64,7 @@ public class Controller {
     public void addView(View view) {
         this.view = view;
     }
-        
+
     public void connect(String selectedPortIdentifier) {
         try {
             CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(selectedPortIdentifier);
@@ -71,10 +74,51 @@ public class Controller {
             this.model.setDownlink(serialPort.getInputStream());
             this.model.setUplink(serialPort.getOutputStream());
             this.model.setConnected(true);
+            new Thread(new SerialReader(this.model.getDownlink(), this.model)).start();
         } catch (NoSuchPortException | PortInUseException | UnsupportedCommOperationException | IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
+    private class SerialReader implements Runnable {
+
+        private BufferedReader downlinkBuffer;
+
+        public SerialReader(InputStream in, Model model) {
+            this.downlinkBuffer = new BufferedReader(new InputStreamReader(in));
+
+        }
+
+        public void run() {
+            while (true) {
+                String message;
+                while (true) {
+                    try {
+                        message = downlinkBuffer.readLine();
+                      
+                    } catch (IOException e) {
+
+                        break;
+                    }
+                    //Print the line read
+                    if (message.length() != 0 && message.contains("DTE.")) {
+                        
+                       String[] messageSplitted = message.split(":");
+                       
+                       if(messageSplitted[0].equals("DTE.tresh")){
+                           model.setThresholdTemperature(Integer.parseInt(messageSplitted[1]));
+                       }
+                       else if(messageSplitted[0].equals("DTE.temp")){
+                           model.setCurrentTemperature(Integer.parseInt(messageSplitted[1]));
+                       }
+                            
+                        
+                    }
+
+                }
+            }
+
+        }
+
+    }
 }
