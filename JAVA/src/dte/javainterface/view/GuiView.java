@@ -80,7 +80,7 @@ public class GuiView extends View {
             newThresoldButton.setEnabled(true);
             comBox.setEnabled(false);
             comButton.setEnabled(false);
-            status.setForeground(Color.GREEN);
+            status.setForeground(new Color(146,200,74));
             status.setText("Connected");
 
             if (super.model.getCurrentTemperature() == -1000) {
@@ -136,16 +136,24 @@ public class GuiView extends View {
     public void printAlertLevel(){
         switch(this.model.getAlertLevel()){
             case ALERT_COOLING:
+                alertLevel.setForeground(Color.BLUE);
                 alertLevel.setText("Cooling");
                 break;
             case ALERT_IDLE:
+                alertLevel.setForeground(Color.BLACK);
                 alertLevel.setText("IDLE");
                 break;
             case ALERT_HEATING:
-                alertLevel.setText("HEATING");
+                alertLevel.setForeground(Color.ORANGE);
+                alertLevel.setText("Heating");
                 break;
             case ALERT_OVERHEATING:
+                alertLevel.setForeground(Color.RED);
                 alertLevel.setText("OVERHEATING");
+                break;
+            default:
+                alertLevel.setForeground(Color.BLACK);
+                alertLevel.setText("N/A");
                 break;
         }
     }
