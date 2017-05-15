@@ -92,7 +92,7 @@ public class Model extends Observable {
      */
     public Model() {
         this.currentTemperature = -1000;
-        this.thresholdTemperature = -1000;
+        this.thresholdTemperature = 20;
         this.alertLevel = -1000;
         this.temperaturesHistory = new LinkedHashMap<Date, Integer>();
         this.alertLevelHistory = new LinkedHashMap<Date, Integer>();
@@ -248,6 +248,7 @@ public class Model extends Observable {
         this.checkAlertLevel();
         this.setChanged();
         this.notifyObservers();
+        
     }
 
     public void checkAlertLevel(){

@@ -65,7 +65,18 @@ public class Controller {
         this.view = view;
     }
 
-    public void connect(String selectedPortIdentifier) {
+    public void sendThreshold(){
+        if(this.model.isConnected()){
+            new Thread(new SerialWriter(this.model, String.valueOf(this.model.getThresholdTemperature()))).start();
+        }
+    }
+    
+    /**
+     * Connect the interface to the selected COM port
+     * @param selectedPortIdentifier The name of the target COM port
+     * @throws PortInUseException When the target COM port is already used
+     */
+    public void connect(String selectedPortIdentifier) throws PortInUseException {
         try {
             CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(selectedPortIdentifier);
             SerialPort serialPort = (SerialPort) portIdentifier.open("DTE", 2500);
@@ -76,11 +87,11 @@ public class Controller {
             this.model.setUplinkWriter(new PrintWriter(this.model.getUplink()));
 
             this.model.setConnected(true);
-            new Thread(new SerialWriter(this.model)).start();
+            
 
             new Thread(new SerialReader(this.model.getDownlink(), this.model)).start();
 
-        } catch (NoSuchPortException | PortInUseException | UnsupportedCommOperationException | IOException ex) {
+        } catch (NoSuchPortException | UnsupportedCommOperationException | IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -88,20 +99,22 @@ public class Controller {
     private class SerialWriter implements Runnable {
 
         Model model;
+        String message;
 
-        public SerialWriter(Model model) {
+        public SerialWriter(Model model, String message) {
             this.model = model;
+            this.message = message;
         }
 
         @Override
         public void run() {
             System.setProperty("line.separator", "\r\n");
-            while (true) {
+            
 
-                this.model.getUplinkWriter().write(this.model.getThresholdTemperature() + "\r\n");
+                this.model.getUplinkWriter().write(message+ "\r\n");
 
                 this.model.getUplinkWriter().flush();
-            }
+            
 
         }
 

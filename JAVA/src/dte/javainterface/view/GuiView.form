@@ -152,7 +152,7 @@
                               <Component id="newThresoldButton" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="alertLabel" min="-2" pref="171" max="-2" attributes="0"/>
+                      <Component id="errorLabel" min="-2" pref="171" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
@@ -179,7 +179,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="statusLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="status" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="alertLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="errorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -256,7 +256,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newThresoldButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="alertLabel">
+        <Component class="javax.swing.JLabel" name="errorLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="New thresold applied"/>
           </Properties>

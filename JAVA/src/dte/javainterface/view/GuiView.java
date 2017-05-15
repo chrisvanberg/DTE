@@ -30,15 +30,11 @@ import static dte.javainterface.model.Model.ALERT_HEATING;
 import static dte.javainterface.model.Model.ALERT_IDLE;
 import static dte.javainterface.model.Model.ALERT_OVERHEATING;
 import gnu.io.CommPortIdentifier;
-import gnu.io.NoSuchPortException;
 import gnu.io.PortInUseException;
-import gnu.io.UnsupportedCommOperationException;
 import java.awt.Color;
-import java.io.IOException;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
 
 /**
  * Graphical interface of the App
@@ -50,7 +46,7 @@ public class GuiView extends View {
      */
     public GuiView() {
         initComponents();
-        alertLabel.setVisible(false);
+        errorLabel.setVisible(false);
     }
 
     /**
@@ -62,7 +58,7 @@ public class GuiView extends View {
     public GuiView(Controller controller, Model model) {
         super(controller, model);
         initComponents();
-        alertLabel.setVisible(false);
+        errorLabel.setVisible(false);
 
     }
 
@@ -83,6 +79,11 @@ public class GuiView extends View {
             status.setForeground(new Color(146,200,74));
             status.setText("Connected");
 
+            
+            
+            if(this.errorLabel.getText().contains("is already used")){
+                this.errorLabel.setText("");
+            }
             if (super.model.getCurrentTemperature() == -1000) {
                 currentTemperature.setText("N/A");
             } else {
@@ -178,7 +179,7 @@ public class GuiView extends View {
         comButton = new javax.swing.JToggleButton();
         newThresold = new javax.swing.JTextField();
         newThresoldButton = new javax.swing.JToggleButton();
-        alertLabel = new javax.swing.JLabel();
+        errorLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
@@ -234,7 +235,7 @@ public class GuiView extends View {
             }
         });
 
-        alertLabel.setText("New thresold applied");
+        errorLabel.setText("New thresold applied");
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -266,7 +267,7 @@ public class GuiView extends View {
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(comButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(newThresoldButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(alertLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
         mainPanelLayout.setVerticalGroup(
@@ -288,7 +289,7 @@ public class GuiView extends View {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(statusLabel)
                     .addComponent(status)
-                    .addComponent(alertLabel))
+                    .addComponent(errorLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -365,15 +366,22 @@ public class GuiView extends View {
 
     private void newThresoldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newThresoldButtonActionPerformed
        this.model.setThresholdTemperature(Integer.parseInt(newThresold.getText()));
+       this.controller.sendThreshold();
     }//GEN-LAST:event_newThresoldButtonActionPerformed
 
     private void newThresoldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newThresoldActionPerformed
         this.model.setThresholdTemperature(Integer.parseInt(newThresold.getText()));
+        this.controller.sendThreshold();
     }//GEN-LAST:event_newThresoldActionPerformed
 
     private void comButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comButtonActionPerformed
         
-        this.controller.connect(String.valueOf(comBox.getSelectedItem()));
+        try {
+            this.controller.connect(String.valueOf(comBox.getSelectedItem()));
+        } catch (PortInUseException ex) {
+            this.errorLabel.setVisible(true);
+           this.errorLabel.setText(String.valueOf(comBox.getSelectedItem())+" is already used !");
+        }
         
     }//GEN-LAST:event_comButtonActionPerformed
 
@@ -383,7 +391,6 @@ public class GuiView extends View {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JLabel alertLabel;
     private javax.swing.JLabel alertLevel;
     private javax.swing.JLabel alertLevelLabel;
     private javax.swing.JComboBox<String> comBox;
@@ -395,6 +402,7 @@ public class GuiView extends View {
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JMenu editMenu;
+    private javax.swing.JLabel errorLabel;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
