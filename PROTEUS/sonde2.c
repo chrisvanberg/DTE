@@ -14,13 +14,15 @@ int treshld = 15;
 
 #int_rda 
 void isr() { 
-    char treshstr[10];
-
-    // Read string from RS232
-    gets(treshstr); 
+   char treshstr[10];
     
-    // convert treshstr in int 
-    treshld = atoi(treshstr);
+   disable_interrupts(INT_RDA);
+
+   // Read string from RS232
+   gets(treshstr);
+   
+   // convert treshstr in int 
+   treshld = atoi(treshstr);
 } 
 
 int simpleBCDConverter(value) {
@@ -70,7 +72,7 @@ void main()
    setup_timer_1(T1_INTERNAL|T1_DIV_BY_1); // 13,1 ms overflow
    setup_low_volt_detect(FALSE);
    enable_interrupts(GLOBAL);
-   enable_interrupts(INT_RDA);
+   
    
    int lastTemperature = -1000;
    int currentTemperature;
@@ -81,6 +83,7 @@ void main()
    delay_ms(10);
 
    while(TRUE) {
+      enable_interrupts(INT_RDA);
       //delay_ms(10);
       // Read the value from A/N converter (10bits [0 => 1023])
       // And convert it to a range from 0 to 100 (°C)
