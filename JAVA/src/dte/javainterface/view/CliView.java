@@ -62,7 +62,7 @@ public class CliView extends View {
     public void draw() {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        System.out.println(sdf.format(cal.getTime())+": CLI Update ("+nbUpdate+") triggered ! : "+super.model.toString());
+        System.out.println(sdf.format(cal.getTime())+" CLI Update triggered ("+nbUpdate+") ! : "+super.model.toString());
         nbUpdate += 1;
     }
 
