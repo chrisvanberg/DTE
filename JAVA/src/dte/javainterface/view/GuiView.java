@@ -364,11 +364,11 @@ public class GuiView extends View {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void newThresoldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newThresoldButtonActionPerformed
-        // TODO add your handling code here:
+       this.model.setThresholdTemperature(Integer.parseInt(newThresold.getText()));
     }//GEN-LAST:event_newThresoldButtonActionPerformed
 
     private void newThresoldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newThresoldActionPerformed
-        // TODO add your handling code here:
+        this.model.setThresholdTemperature(Integer.parseInt(newThresold.getText()));
     }//GEN-LAST:event_newThresoldActionPerformed
 
     private void comButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comButtonActionPerformed

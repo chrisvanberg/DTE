@@ -36,7 +36,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -75,33 +74,39 @@ public class Controller {
             this.model.setDownlink(serialPort.getInputStream());
             this.model.setUplink(serialPort.getOutputStream());
             this.model.setUplinkWriter(new PrintWriter(this.model.getUplink()));
-            
-            
+
             this.model.setConnected(true);
             new Thread(new SerialWriter(this.model)).start();
+
             new Thread(new SerialReader(this.model.getDownlink(), this.model)).start();
-            
+
         } catch (NoSuchPortException | PortInUseException | UnsupportedCommOperationException | IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private class SerialWriter implements Runnable {
+
         Model model;
-        public SerialWriter(Model model){
-          this.model = model;
+
+        public SerialWriter(Model model) {
+            this.model = model;
         }
-        
+
         @Override
         public void run() {
-            System.out.println("SET");
-				System.setProperty("line.separator","\r\n");
-				this.model.getUplinkWriter().write("Hello\r\n");
-				this.model.getUplinkWriter().flush();
+            System.setProperty("line.separator", "\r\n");
+            while (true) {
+
+                this.model.getUplinkWriter().write(this.model.getThresholdTemperature() + "\r\n");
+
+                this.model.getUplinkWriter().flush();
+            }
+
         }
-        
+
     }
-    
+
     private class SerialReader implements Runnable {
 
         private BufferedReader downlinkBuffer;
