@@ -57,7 +57,7 @@ public class Model extends Observable {
     public static final int BAUDRATE = 9600;
 
     private boolean connected;
-    CommPortIdentifier serialPortId;
+    private CommPortIdentifier serialPortId;
     private Enumeration enumCOMPort;
     private static OutputStream uplink;
     private static PrintWriter uplinkWriter;
@@ -94,6 +94,7 @@ public class Model extends Observable {
      * variables to -1000 (Default state).
      */
     public Model() {
+        //Instance variable initialization
         this.currentTemperature = -1000;
         this.thresholdTemperature = -1000;
         this.alertLevel = -1000;
@@ -124,6 +125,7 @@ public class Model extends Observable {
         this.temperaturesHistory = new LinkedHashMap<Date, Integer>();
         this.alertLevelHistory = new LinkedHashMap<Date, Integer>();
         this.connected = false;
+        this.enumCOMPort = CommPortIdentifier.getPortIdentifiers();
 
         //Update of the temperature & alertLevel
         this.addTemperatureToHistory(this.currentTemperature);
@@ -134,7 +136,7 @@ public class Model extends Observable {
      * Model constructor with current and threshold temperature. Automaticaly
      * calculate the AlertLevel
      *
-     *  @param currentTemperature Must be an int and be the current temperature
+     * @param currentTemperature Must be an int and be the current temperature
      * given by the sensors
      * @param thresholdTemperature Must be an int and be the temperature who
      * trigger the alert
@@ -146,6 +148,7 @@ public class Model extends Observable {
         this.temperaturesHistory = new LinkedHashMap<Date, Integer>();
         this.alertLevelHistory = new LinkedHashMap<Date, Integer>();
         this.connected = false;
+        this.enumCOMPort = CommPortIdentifier.getPortIdentifiers();
 
         try {
             this.addAlertLevelToHistory(this.alertLevel);
@@ -263,6 +266,8 @@ public class Model extends Observable {
      */
     public void setEnumCOMPort(Enumeration enumCOMPort) {
         this.enumCOMPort = enumCOMPort;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     /**
@@ -315,8 +320,8 @@ public class Model extends Observable {
     }
 
     /**
-     * Check and update the alertlevel by comparing the currentTemperature and the
-     * current threshold temparature
+     * Check and update the alertlevel by comparing the currentTemperature and
+     * the current threshold temparature
      */
     public void checkAlertLevel() {
         int lastTemperatureRecorded = -1000;

@@ -24,7 +24,6 @@
 package dte.javainterface.controller;
 
 import dte.javainterface.model.Model;
-import static dte.javainterface.model.Model.BAUDRATE;
 import dte.javainterface.view.View;
 import gnu.io.CommPortIdentifier;
 import gnu.io.NoSuchPortException;
@@ -38,6 +37,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+//Constant
+import static dte.javainterface.model.Model.BAUDRATE;
 
 /**
  * Controller of the App. Manage all the functionalities
@@ -65,14 +67,21 @@ public class Controller {
         this.view = view;
     }
 
-    public void sendThreshold(){
-        if(this.model.isConnected()){
-            new Thread(new SerialWriter(this.model, String.valueOf(this.model.getThresholdTemperature()))).start();
+    /**
+     * Send the new threshold temparature to the connected COM port
+     */
+    public void sendThreshold() {
+        if (this.model.isConnected()) {
+            //new Thread(new SerialWriter(this.model, String.valueOf(this.model.getThresholdTemperature()))).start();
+            this.model.getUplinkWriter().write(this.model.getThresholdTemperature() + '\r');
+
+            this.model.getUplinkWriter().flush();
         }
     }
-    
+
     /**
      * Connect the interface to the selected COM port
+     *
      * @param selectedPortIdentifier The name of the target COM port
      * @throws PortInUseException When the target COM port is already used
      */
@@ -87,7 +96,6 @@ public class Controller {
             this.model.setUplinkWriter(new PrintWriter(this.model.getUplink()));
 
             this.model.setConnected(true);
-            
 
             new Thread(new SerialReader(this.model.getDownlink(), this.model)).start();
 
@@ -96,6 +104,9 @@ public class Controller {
         }
     }
 
+    /**
+     * 
+     */
     private class SerialWriter implements Runnable {
 
         Model model;
@@ -108,13 +119,11 @@ public class Controller {
 
         @Override
         public void run() {
-           //System.setProperty("line.separator", "\r");
-            
+            //System.setProperty("line.separator", "\r");
 
-                this.model.getUplinkWriter().write(message + '\r');
+            this.model.getUplinkWriter().write(message + '\r');
 
-                this.model.getUplinkWriter().flush();
-            
+            this.model.getUplinkWriter().flush();
 
         }
 

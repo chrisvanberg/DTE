@@ -56,7 +56,7 @@ public class DTE {
         gui.addObservable(model);
         cli.addObservable(model);
 
-        //cli.draw();
+        cli.draw();
         gui.setVisible(true);
         gui.update(null, null);
 
@@ -69,7 +69,7 @@ public class DTE {
      * settings)
      */
     public static void main(String[] args) {
-        
+
         javax.swing.SwingUtilities.invokeLater(DTE::new);
 
     }
