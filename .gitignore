@@ -2,6 +2,12 @@
 /Logo
 .DS_Store
 nblibraries.properties
+
+#PROTEUS
+*.pdsbak
+*.workspace
+/history
+
 #!Custom
 
 *.class
