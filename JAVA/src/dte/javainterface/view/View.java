@@ -33,11 +33,19 @@ public abstract class View extends javax.swing.JFrame implements Observer {
     protected Model model;
     protected Controller controller;
 
+    /**
+     * Full View constructor
+     * @param controller Controller to link with this View
+     * @param model Model to link with this View
+     */
     public View(Controller controller, Model model) {
         this.model = model;
         this.controller = controller;
     }
 
+    /**
+     * Empty View constructor
+     */
     public View() {
 
     }
@@ -50,8 +58,9 @@ public abstract class View extends javax.swing.JFrame implements Observer {
     public void addObservable(Observable observable) {
         observable.addObserver(this);
     }
-    
-    public void printAlertLevel(){
-        
-    }
+
+    /**
+     * Must print the current AlertLevel on the View
+     */
+    public abstract void printAlertLevel();
 }

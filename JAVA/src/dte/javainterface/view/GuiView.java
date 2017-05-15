@@ -25,16 +25,17 @@ package dte.javainterface.view;
 
 import dte.javainterface.controller.Controller;
 import dte.javainterface.model.Model;
-import static dte.javainterface.model.Model.ALERT_COOLING;
-import static dte.javainterface.model.Model.ALERT_HEATING;
-import static dte.javainterface.model.Model.ALERT_IDLE;
-import static dte.javainterface.model.Model.ALERT_OVERHEATING;
 import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
 import java.awt.Color;
 import java.util.Observable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+//Constant
+import static dte.javainterface.model.Model.ALERT_COOLING;
+import static dte.javainterface.model.Model.ALERT_HEATING;
+import static dte.javainterface.model.Model.ALERT_IDLE;
+import static dte.javainterface.model.Model.ALERT_OVERHEATING;
+import static dte.javainterface.model.Model.APPNAME;
 
 /**
  * Graphical interface of the App
@@ -46,6 +47,7 @@ public class GuiView extends View {
      */
     public GuiView() {
         initComponents();
+        this.setTitle(APPNAME);
         errorLabel.setVisible(false);
     }
 
@@ -58,6 +60,7 @@ public class GuiView extends View {
     public GuiView(Controller controller, Model model) {
         super(controller, model);
         initComponents();
+        this.setTitle(APPNAME);
         errorLabel.setVisible(false);
 
     }
@@ -70,35 +73,34 @@ public class GuiView extends View {
      */
     @Override
     public void update(Observable o, Object arg) {
-
         if (super.model.isConnected()) {
             newThresold.setEnabled(true);
             newThresoldButton.setEnabled(true);
             comBox.setEnabled(false);
             comButton.setEnabled(false);
-            status.setForeground(new Color(146,200,74));
+            status.setForeground(new Color(146, 200, 74));
             status.setText("Connected");
 
-            
-            
-            if(this.errorLabel.getText().contains("is already used")){
+            if (this.errorLabel.getText().contains("is already used")) {
                 this.errorLabel.setText("");
             }
+
             if (super.model.getCurrentTemperature() == -1000) {
                 currentTemperature.setText("N/A");
             } else {
-                currentTemperature.setText(String.valueOf(super.model.getCurrentTemperature())+"° C");
+                currentTemperature.setText(String.valueOf(super.model.getCurrentTemperature()) + "° C");
             }
+
             if (super.model.getAlertLevel() == -1000) {
                 alertLevel.setText("N/A");
             } else {
                 alertLevel.setText(String.valueOf(super.model.getAlertLevel()));
             }
-            if(this.model.getThresholdTemperature()==-1000){
+
+            if (super.model.getThresholdTemperature() == -1000) {
                 newThresold.setText("");
-            }
-            else{
-            newThresold.setText(String.valueOf(this.model.getThresholdTemperature()));
+            } else {
+                newThresold.setText(String.valueOf(super.model.getThresholdTemperature()));
             }
             printAlertLevel();
         } else {
@@ -106,36 +108,28 @@ public class GuiView extends View {
             status.setText("Disconnected");
             comBox.setEnabled(true);
             comButton.setEnabled(true);
-            
+
             currentTemperature.setText("N/A");
             newThresoldButton.setEnabled(false);
             newThresold.setEnabled(false);
             alertLevel.setText("N/A");
-            
-            
-            while(this.model.getEnumCOMPort().hasMoreElements())
-		{
-			this.model.setSerialPortId((CommPortIdentifier)this.model.getEnumCOMPort().nextElement());
-			if(this.model.getSerialPortId().getPortType() == CommPortIdentifier.PORT_SERIAL)
-			{
-                            //if(!this.model.getSerialPortId().getName().contains("Bluetooth")){
-                            
-			comBox.addItem(this.model.getSerialPortId().getName());
-                            //}
-			}
-		}
-            
-            
-        }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+
+            while (super.model.getEnumCOMPort().hasMoreElements()) {
+                super.model.setSerialPortId((CommPortIdentifier) super.model.getEnumCOMPort().nextElement());
+                if (super.model.getSerialPortId().getPortType() == CommPortIdentifier.PORT_SERIAL) {
+                    comBox.addItem(super.model.getSerialPortId().getName());
+                }
             }
+
+        }
+
+        java.awt.EventQueue.invokeLater(() -> {
         });
     }
 
     @Override
-    public void printAlertLevel(){
-        switch(this.model.getAlertLevel()){
+    public void printAlertLevel() {
+        switch (super.model.getAlertLevel()) {
             case ALERT_COOLING:
                 alertLevel.setForeground(Color.BLUE);
                 alertLevel.setText("Cooling");
@@ -158,7 +152,18 @@ public class GuiView extends View {
                 break;
         }
     }
-    
+
+    private void newThresoldAction() {
+        try {
+            super.model.setThresholdTemperature(Integer.parseInt(newThresold.getText()));
+            this.errorLabel.setText("");
+            this.controller.sendThreshold();
+        } catch (NumberFormatException ex) {
+            this.errorLabel.setText("Please enter a valid number");
+            this.newThresold.setText(String.valueOf(super.model.getThresholdTemperature()));
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -299,25 +304,24 @@ public class GuiView extends View {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void newThresoldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newThresoldButtonActionPerformed
-       this.model.setThresholdTemperature(Integer.parseInt(newThresold.getText()));
-       this.controller.sendThreshold();
+        this.newThresoldAction();
     }//GEN-LAST:event_newThresoldButtonActionPerformed
 
     private void newThresoldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newThresoldActionPerformed
-        this.model.setThresholdTemperature(Integer.parseInt(newThresold.getText()));
-        this.controller.sendThreshold();
+        this.newThresoldAction();
     }//GEN-LAST:event_newThresoldActionPerformed
 
     private void comButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comButtonActionPerformed
-        
+
         try {
             this.controller.connect(String.valueOf(comBox.getSelectedItem()));
         } catch (PortInUseException ex) {
             this.errorLabel.setVisible(true);
-           this.errorLabel.setText(String.valueOf(comBox.getSelectedItem())+" is already used !");
+            this.errorLabel.setText(String.valueOf(comBox.getSelectedItem()) + " is already used !");
         }
-        
+
     }//GEN-LAST:event_comButtonActionPerformed
 
     private void comBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comBoxActionPerformed

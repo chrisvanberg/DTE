@@ -43,6 +43,11 @@ import java.util.logging.Logger;
  */
 public class Model extends Observable {
 
+    /**
+     * The name of the app
+     */
+    public static final String APPNAME = "DTE";
+    
     private int currentTemperature;
     private int thresholdTemperature;
     private int alertLevel;

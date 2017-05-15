@@ -57,13 +57,18 @@ public class CliView extends View {
     }
 
     /**
-     * Draw the view on the standart output
+     * Draw the view on the standart output. For the moment draw the Model as a String with an update counter
      */
     public void draw() {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         System.out.println(sdf.format(cal.getTime())+" CLI Update triggered ("+nbUpdate+") ! : "+super.model.toString());
         nbUpdate += 1;
+    }
+
+    @Override
+    public void printAlertLevel() {
+        //Not implemented yet
     }
 
 }

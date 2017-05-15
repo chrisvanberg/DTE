@@ -24,10 +24,12 @@
 package dte.javainterface.exceptions;
 
 /**
- * EmptryTemperatureException is triggered when you try to access to an empty history
- * 
+ * EmptryTemperatureException is triggered when you try to access to an empty
+ * history
+ *
  */
 public class EmptyHistoryException extends Exception {
+
     public EmptyHistoryException() {
         super();
     }
