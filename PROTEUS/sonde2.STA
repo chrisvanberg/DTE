@@ -1,6 +1,6 @@
 
-ROM used:   1754/32768 (5%)
-            1754/32768 (5%) including unused fragments
+ROM used:   1756/32768 (5%)
+            1756/32768 (5%) including unused fragments
 
             0.3 Average locations per line
             2.4 Average locations per statement
@@ -13,7 +13,7 @@ Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  104    37   5  sonde2.c
+  107    38   5  sonde2.c
     6     0   0  sonde2.h
   785     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F458.h
  2227   258  35  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
@@ -23,7 +23,7 @@ Lines Stmts  %   Files
  1352   359  49  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
   456    84  11  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\LCD.c
 ----- -----
- 5425   738 Total
+ 5428   739 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -33,7 +33,7 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0    244   7   11             @MULFF
 0     76   2    2             @MUL88
 0    396  11    9   1815 10.5  atoi
-0     42   1   10     66  2.0  isr
+0     44   1   10     86  2.1  isr
 0     40   1    3             @DIV88
 0     82   2    4    262  3.0  bitsToBCD
 0     24   1    2    117  3.2  checkLed
@@ -46,11 +46,11 @@ Page ROM  %  RAM    Vol Diff  Functions:
 
 Program metrics:
     Functions               5
-    Statements              738
+    Statements              739
     Comments                1039
-    Volume (V)              3632
+    Volume (V)              3669
     Difficulty (D)          23.1
-    Effort to implement (E) 83755
+    Effort to implement (E) 84676
     Time to implement (T)   1 hours, 18 minutes
     Est Delivered Bugs (B)  1
     Cyclomatic Complexity   11
@@ -61,7 +61,7 @@ Program metrics:
 00000-00002     4  0  
 00004-00006     0  4  
 00008-000AC   166  0  
-000AE-07FFE  1584  31010  
+000AE-07FFE  1586  31008  
 
 
 

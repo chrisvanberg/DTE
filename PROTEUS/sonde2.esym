@@ -1,9 +1,9 @@
-D G "__PCH__" 0 106 ""5.065d""
-D G "__DEVICE__" 0 106 "458"
-D G "__DATE__" 0 106 ""15-mai-17""
-D G "__TIME__" 0 106 ""16:29:15""
-D G "_UNICODE" 0 106 ""?""
-D G "__EVAL" 0 106 ""?"" "Standard Header file for the PIC18F458 device ////////////////"
+D G "__PCH__" 0 0 ""5.065d""
+D G "__DEVICE__" 0 0 ""
+D G "__DATE__" 0 0 ""15-mai-17""
+D G "__TIME__" 0 0 ""22:59:57""
+D G "_UNICODE" 0 0 ""?""
+D G "__EVAL" 0 0 ""?"" "Standard Header file for the PIC18F458 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 f N "set_tris_a" 2 40 ""
 v L "value" 2 40 "int8" `54 
@@ -466,9 +466,9 @@ f N "read_adc" 2 463 ""
 f G "read_adc" 2 463 "int16()" `216 
 f N "read_adc" 2 464 ""
 v L "mode" 2 464 "int8" `217 
-f G "read_adc" 2 464 "int16(int8 mode,int8 setting)" `216 
+f G "read_adc" 2 464 "int16(int8 mode)" `216 
 f N "adc_done" 2 465 ""
-f B "adc_done" 2 465 "int8(int8 mode,int8 setting)" `216  "Constants used for SETUP_ADC() are:"
+f B "adc_done" 2 465 "int8(int8 mode)" `216  "Constants used for SETUP_ADC() are:"
 d G "ADC_OFF" 2 467 "0" "ADC Off"
 d G "ADC_CLOCK_DIV_2" 2 468 "0x10000"
 d G "ADC_CLOCK_DIV_4" 2 469 "0x4000"
@@ -823,9 +823,9 @@ f B "i2c_init" 2 616 "void(int8 stream,int32 baud)" `438  "#use spi() Prototypes
 f N "spi_xfer" 2 619 ""
 f B "spi_xfer" 2 619 "int8()" `441 
 f N "spi_xfer" 2 620 ""
-f G "spi_xfer" 2 620 "int16(int8 data)" `442 
+f G "spi_xfer" 2 620 "int16()" `442 
 f N "spi_xfer" 2 621 ""
-f G "spi_xfer" 2 621 "int32(int8 data)" `442 
+f G "spi_xfer" 2 621 "int32()" `442 
 f N "spi_xfer" 2 622 ""
 v L "data" 2 622 "int8" `443 
 f B "spi_xfer" 2 622 "int8(int8 data)" `442 
@@ -905,18 +905,18 @@ f B "spi_prewrite" 2 641 "void(int8 ,int32 data)" `495
 f N "spi_xfer_in" 2 642 ""
 f B "spi_xfer_in" 2 642 "int8()" `498 
 f N "spi_xfer_in" 2 643 ""
-f G "spi_xfer_in" 2 643 "int16(int8 bits)" `499 
+f G "spi_xfer_in" 2 643 "int16()" `499 
 f N "spi_xfer_in" 2 644 ""
-f G "spi_xfer_in" 2 644 "int32(int8 bits)" `499 
+f G "spi_xfer_in" 2 644 "int32()" `499 
 f N "spi_xfer_in" 2 645 ""
 v L "bits" 2 645 "int8" `500 
 f B "spi_xfer_in" 2 645 "int8(int8 bits)" `499 
 f N "spi_xfer_in" 2 646 ""
 v L "bits" 2 646 "int8" `502 
-f G "spi_xfer_in" 2 646 "int16(int8 bits,int8 bits)" `501 
+f G "spi_xfer_in" 2 646 "int16(int8 bits)" `501 
 f N "spi_xfer_in" 2 647 ""
 v L "bits" 2 647 "int8" `502 
-f G "spi_xfer_in" 2 647 "int32(int8 bits,int8 bits)" `501 
+f G "spi_xfer_in" 2 647 "int32(int8 bits)" `501 
 f N "spi_xfer_in" 2 648 ""
 v L "stream" 2 648 "int8" `502 
 v L "bits" 2 648 "int8" `503 
@@ -924,15 +924,15 @@ f B "spi_xfer_in" 2 648 "int8(int8 stream,int8 bits)" `501
 f N "spi_xfer_in" 2 649 ""
 v L "stream" 2 649 "int8" `502 
 v L "bits" 2 649 "int8" `506 
-f G "spi_xfer_in" 2 649 "int16(int8 stream,int8 bits,int8 task)" `504 
+f G "spi_xfer_in" 2 649 "int16(int8 stream,int8 bits)" `504 
 f N "spi_xfer_in" 2 650 ""
 v L "stream" 2 650 "int8" `502 
 v L "bits" 2 650 "int8" `506 
-f G "spi_xfer_in" 2 650 "int32(int8 stream,int8 bits,int8 task)" `504  "#use rtos() Prototypes:"
+f G "spi_xfer_in" 2 650 "int32(int8 stream,int8 bits)" `504  "#use rtos() Prototypes:"
 f N "rtos_run" 2 653 ""
-f B "rtos_run" 2 653 "void(int8 stream,int8 bits,int8 task)" `504 
+f B "rtos_run" 2 653 "void(int8 stream,int8 bits)" `504 
 f N "rtos_yield" 2 654 ""
-f B "rtos_yield" 2 654 "void(int8 bits,int8 task)" `505 
+f B "rtos_yield" 2 654 "void(int8 bits)" `505 
 f N "rtos_enable" 2 655 ""
 v L "task" 2 655 "int8" `507 
 f B "rtos_enable" 2 655 "void(int8 task)" `506 
@@ -968,9 +968,9 @@ f B "rtos_stats" 2 665 "void(int8 task,*int8 stat)" `524  "#use timer() Prototyp
 f N "get_ticks" 2 668 ""
 f B "get_ticks" 2 668 "int8()" `527 
 f N "get_ticks" 2 669 ""
-f G "get_ticks" 2 669 "int16(int8 stream)" `528 
+f G "get_ticks" 2 669 "int16()" `528 
 f N "get_ticks" 2 670 ""
-f G "get_ticks" 2 670 "int32(int8 stream)" `528 
+f G "get_ticks" 2 670 "int32()" `528 
 f N "get_ticks" 2 671 ""
 v L "stream" 2 671 "int8" `529 
 f B "get_ticks" 2 671 "int8(int8 stream)" `528 
@@ -1840,36 +1840,37 @@ D G "RED_LED" 0 11 "PIN_C1"
 V G "treshld" 0 13 "int8" `1060 
 F N "isr" 0 16 ""
 F G "isr" 0 16 "void()" `1061 
-V L "treshstr" 0 17 "int8[10]" `1062  "Read string from RS232"
-C L "isr" 0 22 1 "FUNCTION"
-F N "simpleBCDConverter" 0 26 ""
-V L "value" 0 26 "int8" `1064 
-F G "simpleBCDConverter" 0 26 "int8(int8 value)" `1063  "Shift tens from 4 bits to the left"
-C L "simpleBCDConverter" 0 22 1 "FUNCTION"
-C L "bitsToBCD" 0 32 1 "*"
-F N "bitsToBCD" 0 35 ""
-V L "value" 0 35 "int8" `1069 
-F G "bitsToBCD" 0 35 "void(int8 value)" `1068 
-V L "tens" 0 36 "int8" `1070 
-V L "unity" 0 37 "int8" `1071 
-C L "checkLed" 0 50 1 "*"
-F N "checkLed" 0 53 ""
-V L "temp" 0 53 "int8" `1073 
-V L "treshld" 0 53 "int8" `1074 
-F G "checkLed" 0 53 "void(int8 temp,int8 treshld)" `1072  "If temps is greater than treshold"
-C L "checkLed" 0 50 1 "FUNCTION"
-C L "checkLed" 0 50 1 "FUNCTION"
-F N "MAIN" 0 64 ""
-F G "MAIN" 0 65 "void()" `1075 
-C L "MAIN" 0 50 1 "FUNCTION"
-C L "MAIN" 0 50 1 "FUNCTION"
-C L "MAIN" 0 50 1 "FUNCTION"
-V L "lastTemperature" 0 75 "int8" `1078 
-V L "currentTemperature" 0 76 "int8" `1079  "only sends treshold at start"
-C L "MAIN" 0 50 4 "FUNCTION"
-C L "MAIN" 0 50 1 "FUNCTION"
-C L "MAIN" 0 50 2 "FUNCTION"
-C L "MAIN" 0 50 1 "FUNCTION"
+V L "treshstr" 0 17 "int8[10]" `1062 
+C L "isr" 0 21 1 "FUNCTION"
+C L "isr" 0 21 1 "FUNCTION"
+F N "simpleBCDConverter" 0 28 ""
+V L "value" 0 28 "int8" `1064 
+F G "simpleBCDConverter" 0 28 "int8(int8 value)" `1063  "Shift tens from 4 bits to the left"
+C L "simpleBCDConverter" 0 21 1 "FUNCTION"
+C L "bitsToBCD" 0 34 1 "*"
+F N "bitsToBCD" 0 37 ""
+V L "value" 0 37 "int8" `1069 
+F G "bitsToBCD" 0 37 "void(int8 value)" `1068 
+V L "tens" 0 38 "int8" `1070 
+V L "unity" 0 39 "int8" `1071 
+C L "checkLed" 0 52 1 "*"
+F N "checkLed" 0 55 ""
+V L "temp" 0 55 "int8" `1073 
+V L "treshld" 0 55 "int8" `1074 
+F G "checkLed" 0 55 "void(int8 temp,int8 treshld)" `1072  "If temps is greater than treshold"
+C L "checkLed" 0 52 1 "FUNCTION"
+C L "checkLed" 0 52 1 "FUNCTION"
+F N "MAIN" 0 66 ""
+F G "MAIN" 0 67 "void()" `1075 
+C L "MAIN" 0 52 1 "FUNCTION"
+C L "MAIN" 0 52 1 "FUNCTION"
+C L "MAIN" 0 52 1 "FUNCTION"
+V L "lastTemperature" 0 77 "int8" `1078 
+V L "currentTemperature" 0 78 "int8" `1079  "only sends treshold at start"
+C L "MAIN" 0 52 4 "FUNCTION"
+C L "MAIN" 0 52 1 "FUNCTION"
+C L "MAIN" 0 52 2 "FUNCTION"
+C L "MAIN" 0 52 1 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 0
