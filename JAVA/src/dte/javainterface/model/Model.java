@@ -51,12 +51,11 @@ public class Model extends Observable {
     private LinkedHashMap<Date, Integer> alertLevelHistory;
 
     //Serial Communication
-    
     /**
      * The communication baudrate
      */
     public static final int BAUDRATE = 9600;
-    
+
     private boolean connected;
     CommPortIdentifier serialPortId;
     private Enumeration enumCOMPort;
@@ -135,8 +134,10 @@ public class Model extends Observable {
      * Model constructor with current and threshold temperature. Automaticaly
      * calculate the AlertLevel
      *
-     * @param currentTemperature
-     * @param thresholdTemperature
+     *  @param currentTemperature Must be an int and be the current temperature
+     * given by the sensors
+     * @param thresholdTemperature Must be an int and be the temperature who
+     * trigger the alert
      */
     public Model(int currentTemperature, int thresholdTemperature) {
         this.currentTemperature = currentTemperature;
@@ -149,13 +150,14 @@ public class Model extends Observable {
         try {
             this.addAlertLevelToHistory(this.alertLevel);
         } catch (UnknowAlertLevelException ex) {
-            
+
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
      * Get the uplinkWriter
+     *
      * @return PrintWriter The uplinkWriter
      */
     public PrintWriter getUplinkWriter() {
@@ -164,15 +166,16 @@ public class Model extends Observable {
 
     /**
      * Set the uplinkWriter
+     *
      * @param uplinkWriter PrintWriter
      */
     public void setUplinkWriter(PrintWriter uplinkWriter) {
         Model.uplinkWriter = uplinkWriter;
     }
 
-    
     /**
      * Get the uplink
+     *
      * @return OutputStream upLink
      */
     public OutputStream getUplink() {
@@ -181,6 +184,7 @@ public class Model extends Observable {
 
     /**
      * Set the uplink
+     *
      * @param uplink OutputStream
      */
     public void setUplink(OutputStream uplink) {
@@ -189,6 +193,7 @@ public class Model extends Observable {
 
     /**
      * Get the downlink
+     *
      * @return downlink InputStream
      */
     public InputStream getDownlink() {
@@ -197,6 +202,7 @@ public class Model extends Observable {
 
     /**
      * Set the downlink
+     *
      * @param downlink InputStream
      */
     public void setDownlink(InputStream downlink) {
@@ -205,6 +211,7 @@ public class Model extends Observable {
 
     /**
      * Check the connection
+     *
      * @return true if the model is connected to a COM port, false otherwise.
      */
     public boolean isConnected() {
@@ -213,6 +220,7 @@ public class Model extends Observable {
 
     /**
      * Set the connection status
+     *
      * @param connected boolean
      */
     public void setConnected(boolean connected) {
@@ -223,6 +231,7 @@ public class Model extends Observable {
 
     /**
      * Get the identifier of the connected COM port
+     *
      * @return CommPortIdentifier Connected SerialPortID
      */
     public CommPortIdentifier getSerialPortId() {
@@ -231,7 +240,8 @@ public class Model extends Observable {
 
     /**
      * Set the identifier of the connected COM port
-     * @param serialPortId 
+     *
+     * @param serialPortId ComPortIdentifier the id of the connected COM port
      */
     public void setSerialPortId(CommPortIdentifier serialPortId) {
         this.serialPortId = serialPortId;
@@ -239,6 +249,7 @@ public class Model extends Observable {
 
     /**
      * Get the list of avaliable COM ports
+     *
      * @return Enumeration List of avaliable COM ports
      */
     public Enumeration getEnumCOMPort() {
@@ -247,6 +258,7 @@ public class Model extends Observable {
 
     /**
      * Set the list of avaliable COM ports
+     *
      * @param enumCOMPort Enumeration List of avaliable COM ports
      */
     public void setEnumCOMPort(Enumeration enumCOMPort) {
@@ -299,57 +311,55 @@ public class Model extends Observable {
         this.checkAlertLevel();
         this.setChanged();
         this.notifyObservers();
-        
+
     }
 
-    public void checkAlertLevel(){
+    /**
+     * Check and update the alertlevel by comparing the currentTemperature and the
+     * current threshold temparature
+     */
+    public void checkAlertLevel() {
         int lastTemperatureRecorded = -1000;
         try {
-            
+
             LinkedHashMap<Date, Integer> history = getTemperaturesHistory();
             Date theLastEntry = new ArrayList<>(history.keySet()).get(history.size() - 2);
             lastTemperatureRecorded = getTemperatureFromHistory(theLastEntry);
-            
+
         } catch (EmptyHistoryException | NoHistoryDataAvaliableException | ArrayIndexOutOfBoundsException ex) {
             lastTemperatureRecorded = -1000;
         } finally {
-        
-        if(currentTemperature>=thresholdTemperature && currentTemperature!= -1000 && thresholdTemperature != -1000){
-            try {
-                setAlertLevel(ALERT_OVERHEATING);
-            } catch (UnknowAlertLevelException ex) {
-                Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+
+            if (currentTemperature >= thresholdTemperature && currentTemperature != -1000 && thresholdTemperature != -1000) {
+                try {
+                    setAlertLevel(ALERT_OVERHEATING);
+                } catch (UnknowAlertLevelException ex) {
+                    Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (currentTemperature < lastTemperatureRecorded && currentTemperature != -1000 && thresholdTemperature != -1000) {
+                try {
+                    setAlertLevel(ALERT_COOLING);
+                } catch (UnknowAlertLevelException ex) {
+                    Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (currentTemperature > lastTemperatureRecorded && currentTemperature != -1000 && thresholdTemperature != -1000) {
+                try {
+                    setAlertLevel(ALERT_HEATING);
+                } catch (UnknowAlertLevelException ex) {
+                    Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (currentTemperature != -1000 && thresholdTemperature != -1000) {
+                try {
+                    setAlertLevel(ALERT_IDLE);
+                } catch (UnknowAlertLevelException ex) {
+                    Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+
         }
-        else if(currentTemperature<lastTemperatureRecorded && currentTemperature!= -1000 && thresholdTemperature != -1000){
-            try {
-                setAlertLevel(ALERT_COOLING);
-            } catch (UnknowAlertLevelException ex) {
-                Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else if(currentTemperature>lastTemperatureRecorded && currentTemperature!= -1000 && thresholdTemperature != -1000){
-            try {
-                setAlertLevel(ALERT_HEATING);
-            } catch (UnknowAlertLevelException ex) {
-                Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else if (currentTemperature!= -1000 && thresholdTemperature != -1000) {
-            try {
-                setAlertLevel(ALERT_IDLE);
-            } catch (UnknowAlertLevelException ex) {
-                Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-     
-            
-            }
-        
-            
+
     }
-    
+
     /**
      * Get the current AlertLevel
      *

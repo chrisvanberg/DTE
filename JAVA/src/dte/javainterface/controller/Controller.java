@@ -50,7 +50,7 @@ public class Controller {
     /**
      * Controller's constructor with a Model in parametter
      *
-     * @param model
+     * @param model Model to link to this controller
      */
     public Controller(Model model) {
         this.model = model;
@@ -59,7 +59,7 @@ public class Controller {
     /**
      * Connect a view to this controller
      *
-     * @param view
+     * @param view View to link to this controller
      */
     public void addView(View view) {
         this.view = view;
