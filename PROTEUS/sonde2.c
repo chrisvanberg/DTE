@@ -10,6 +10,19 @@
 #define GREEN_LED PIN_C0
 #define RED_LED PIN_C1
 
+int treshld = 15;
+
+#int_rda 
+void isr() { 
+    char treshstr[10];
+
+    // Read string from RS232
+    gets(treshstr); 
+    
+    // convert treshstr in int 
+    treshld = atoi(treshstr);
+} 
+
 int simpleBCDConverter(value) {
    // Shift tens from 4 bits to the left
    // So we have ([Tens] [Unity]) XXXX XXXX
@@ -51,15 +64,16 @@ void checkLed(int temp, int treshld) {
 void main()
 {
    setup_adc_ports(AN0);
-   set_adc_channel(0); // A0 connectï¿½ ï¿½ l'entrï¿½e analogique
+   set_adc_channel(0); // A0 connecté à l'entrée analogique
    setup_adc(ADC_CLOCK_INTERNAL);
    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1|RTCC_8_BIT); // 51,2 us overflow
-   setup_timer_1(T1_INTERNAL|T1_DIV_BY_1); //13,1 ms overflow
+   setup_timer_1(T1_INTERNAL|T1_DIV_BY_1); // 13,1 ms overflow
    setup_low_volt_detect(FALSE);
-
-   int temperature;
-   int treshld = 25;
-   char treshstr[10];
+   enable_interrupts(GLOBAL);
+   enable_interrupts(INT_RDA);
+   
+   int lastTemperature = -1000;
+   int currentTemperature;
    
    // only sends treshold at start
    printf("DTE.tresh:%d\r\n", treshld);
@@ -71,24 +85,19 @@ void main()
       // Read the value from A/N converter (10bits [0 => 1023])
       // And convert it to a range from 0 to 100 (°C)
       // 0.48 => (5 / 1023) * 100
-      temperature = read_adc() * CONV_CST;
+      currentTemperature = read_adc() * CONV_CST;
       
       // Check temp level
-      checkLed(temperature, treshld);
+      checkLed(currentTemperature, treshld);
 
       // Convert bits to BCD
       // And show temp on 7 segment displays
-      bitsToBCD(temperature);
+      bitsToBCD(currentTemperature);
       
-      // sends the temperature to JAVA interface forever
-      printf("DTE.temp:%d\r\n", temperature);
-      //printf("treshold update: %d\r\n", treshld);
-
-      // receives treshold from JAVA interface
-      gets(treshstr); // read string from rs232 (STDIN)
-      //treshstr = "30"; // prove that the problem seems to come from the terminal emulator
-      
-      //printf("treshold string: %s\r\n", treshstr);
-      treshld = atoi(treshstr);
+      // sends the temperature to JAVA interface when change
+      if (currentTemperature != lastTemperature) {
+         lastTemperature = currentTemperature;
+         printf("DTE.temp:%d\r\n", currentTemperature);
+      }
    }
 }
