@@ -6,6 +6,7 @@ nblibraries.properties
 #PROTEUS
 *.pdsbak
 *.workspace
+/history
 
 #!Custom
 
