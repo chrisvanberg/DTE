@@ -108,10 +108,10 @@ public class Controller {
 
         @Override
         public void run() {
-            System.setProperty("line.separator", "\r\n");
+           //System.setProperty("line.separator", "\r");
             
 
-                this.model.getUplinkWriter().write(message+ "\r\n");
+                this.model.getUplinkWriter().write(message + '\r');
 
                 this.model.getUplinkWriter().flush();
             

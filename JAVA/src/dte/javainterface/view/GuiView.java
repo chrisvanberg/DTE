@@ -113,9 +113,9 @@ public class GuiView extends View {
             alertLevel.setText("N/A");
             
             
-            while(this.model.getEnumComm().hasMoreElements())
+            while(this.model.getEnumCOMPort().hasMoreElements())
 		{
-			this.model.setSerialPortId((CommPortIdentifier)this.model.getEnumComm().nextElement());
+			this.model.setSerialPortId((CommPortIdentifier)this.model.getEnumCOMPort().nextElement());
 			if(this.model.getSerialPortId().getPortType() == CommPortIdentifier.PORT_SERIAL)
 			{
                             //if(!this.model.getSerialPortId().getName().contains("Bluetooth")){
@@ -180,17 +180,6 @@ public class GuiView extends View {
         newThresold = new javax.swing.JTextField();
         newThresoldButton = new javax.swing.JToggleButton();
         errorLabel = new javax.swing.JLabel();
-        menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -293,56 +282,6 @@ public class GuiView extends View {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("File");
-
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Exit");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
-        editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
-
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Contents");
-        helpMenu.add(contentsMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
-
-        setJMenuBar(menuBar);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -359,10 +298,6 @@ public class GuiView extends View {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void newThresoldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newThresoldButtonActionPerformed
        this.model.setThresholdTemperature(Integer.parseInt(newThresold.getText()));
@@ -390,27 +325,16 @@ public class GuiView extends View {
     }//GEN-LAST:event_comBoxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JLabel alertLevel;
     private javax.swing.JLabel alertLevelLabel;
     private javax.swing.JComboBox<String> comBox;
     private javax.swing.JToggleButton comButton;
-    private javax.swing.JMenuItem contentsMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JLabel currentTempLabal;
     private javax.swing.JLabel currentTemperature;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JLabel errorLabel;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JMenuBar menuBar;
     private javax.swing.JTextField newThresold;
     private javax.swing.JToggleButton newThresoldButton;
-    private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JLabel status;
     private javax.swing.JLabel statusLabel;
     // End of variables declaration//GEN-END:variables

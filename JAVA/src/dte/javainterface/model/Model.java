@@ -51,13 +51,17 @@ public class Model extends Observable {
     private LinkedHashMap<Date, Integer> alertLevelHistory;
 
     //Serial Communication
+    
+    /**
+     * The communication baudrate
+     */
+    public static final int BAUDRATE = 9600;
+    
     private boolean connected;
     CommPortIdentifier serialPortId;
-    private Enumeration enumComm;
-    public static final int BAUDRATE = 9600;
+    private Enumeration enumCOMPort;
     private static OutputStream uplink;
     private static PrintWriter uplinkWriter;
-    
     private InputStream downlink;
 
     /**
@@ -88,16 +92,16 @@ public class Model extends Observable {
 
     /**
      * Empty Model constructor. Initialize the history and set all the instance
-     * variables to -1000.
+     * variables to -1000 (Default state).
      */
     public Model() {
         this.currentTemperature = -1000;
-        this.thresholdTemperature = 20;
+        this.thresholdTemperature = -1000;
         this.alertLevel = -1000;
         this.temperaturesHistory = new LinkedHashMap<Date, Integer>();
         this.alertLevelHistory = new LinkedHashMap<Date, Integer>();
         this.connected = false;
-        this.enumComm = CommPortIdentifier.getPortIdentifiers();
+        this.enumCOMPort = CommPortIdentifier.getPortIdentifiers();
     }
 
     /**
@@ -108,10 +112,9 @@ public class Model extends Observable {
      * @param thresholdTemperature Must be an int and be the temperature who
      * trigger the alert
      * @param alertLevel int Must be greater than {@value #MIN_ALERT_LVL} and
-     * smaller than
-     * {@value #MAX_ALERT_LVL} {{@value #ALERT_COOLING}, {@value #ALERT_IDLE}, {@value #ALERT_HEATING}, {@value #ALERT_OVERHEATING}}
+     * smaller than {@value #MAX_ALERT_LVL}
      * @throws UnknowAlertLevelException When the alertLevel parametter is
-     * strictly smaller than {@value #MIN_ALERT_LVL} and stritly bigger than
+     * strictly smaller than {@value #MIN_ALERT_LVL} or stritly bigger than
      * {@value #MAX_ALERT_LVL}
      */
     public Model(int currentTemperature, int thresholdTemperature, int alertLevel) throws UnknowAlertLevelException {
@@ -146,60 +149,108 @@ public class Model extends Observable {
         try {
             this.addAlertLevelToHistory(this.alertLevel);
         } catch (UnknowAlertLevelException ex) {
+            
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    /**
+     * Get the uplinkWriter
+     * @return PrintWriter The uplinkWriter
+     */
     public PrintWriter getUplinkWriter() {
         return uplinkWriter;
     }
 
+    /**
+     * Set the uplinkWriter
+     * @param uplinkWriter PrintWriter
+     */
     public void setUplinkWriter(PrintWriter uplinkWriter) {
-        this.uplinkWriter = uplinkWriter;
+        Model.uplinkWriter = uplinkWriter;
     }
 
     
-    
+    /**
+     * Get the uplink
+     * @return OutputStream upLink
+     */
     public OutputStream getUplink() {
         return uplink;
     }
 
+    /**
+     * Set the uplink
+     * @param uplink OutputStream
+     */
     public void setUplink(OutputStream uplink) {
-        this.uplink = uplink;
+        Model.uplink = uplink;
     }
 
+    /**
+     * Get the downlink
+     * @return downlink InputStream
+     */
     public InputStream getDownlink() {
         return downlink;
     }
 
+    /**
+     * Set the downlink
+     * @param downlink InputStream
+     */
     public void setDownlink(InputStream downlink) {
         this.downlink = downlink;
     }
 
+    /**
+     * Check the connection
+     * @return true if the model is connected to a COM port, false otherwise.
+     */
     public boolean isConnected() {
         return connected;
     }
 
+    /**
+     * Set the connection status
+     * @param connected boolean
+     */
     public void setConnected(boolean connected) {
         this.connected = connected;
         this.setChanged();
         this.notifyObservers();
     }
 
+    /**
+     * Get the identifier of the connected COM port
+     * @return CommPortIdentifier Connected SerialPortID
+     */
     public CommPortIdentifier getSerialPortId() {
         return serialPortId;
     }
 
+    /**
+     * Set the identifier of the connected COM port
+     * @param serialPortId 
+     */
     public void setSerialPortId(CommPortIdentifier serialPortId) {
         this.serialPortId = serialPortId;
     }
 
-    public Enumeration getEnumComm() {
-        return enumComm;
+    /**
+     * Get the list of avaliable COM ports
+     * @return Enumeration List of avaliable COM ports
+     */
+    public Enumeration getEnumCOMPort() {
+        return enumCOMPort;
     }
 
-    public void setEnumComm(Enumeration enumComm) {
-        this.enumComm = enumComm;
+    /**
+     * Set the list of avaliable COM ports
+     * @param enumCOMPort Enumeration List of avaliable COM ports
+     */
+    public void setEnumCOMPort(Enumeration enumCOMPort) {
+        this.enumCOMPort = enumCOMPort;
     }
 
     /**
