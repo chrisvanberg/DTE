@@ -71,12 +71,7 @@ public class Controller {
      * Send the new threshold temparature to the connected COM port
      */
     public void sendThreshold() {
-        if (this.model.isConnected()) {
-            //new Thread(new SerialWriter(this.model, String.valueOf(this.model.getThresholdTemperature()))).start();
-            this.model.getUplinkWriter().write(this.model.getThresholdTemperature() + '\r');
-
-            this.model.getUplinkWriter().flush();
-        }
+        serialWriter(String.valueOf(this.model.getThresholdTemperature()));
     }
 
     /**
@@ -105,36 +100,34 @@ public class Controller {
     }
 
     /**
-     * 
+     * Send a message to the connected COM port.
+     *
+     * @param message String any string without a CR or LF.
      */
-    private class SerialWriter implements Runnable {
-
-        Model model;
-        String message;
-
-        public SerialWriter(Model model, String message) {
-            this.model = model;
-            this.message = message;
-        }
-
-        @Override
-        public void run() {
-            //System.setProperty("line.separator", "\r");
-
+    public void serialWriter(String message) {
+        if (this.model.isConnected()) {
             this.model.getUplinkWriter().write(message + '\r');
-
             this.model.getUplinkWriter().flush();
-
         }
-
     }
 
+    /**
+     * SerialReader listen to the connected COM port for message of a DTE
+     * application/board
+     */
     private class SerialReader implements Runnable {
 
         private BufferedReader downlinkBuffer;
+        private Model model;
 
+        /**
+         * SerialReader constructor
+         * @param in InputStream to read
+         * @param model Model to store the data
+         */
         public SerialReader(InputStream in, Model model) {
             this.downlinkBuffer = new BufferedReader(new InputStreamReader(in));
+            this.model = model;
 
         }
 
@@ -149,15 +142,15 @@ public class Controller {
 
                         break;
                     }
-                    //Print the line read
+                    
                     if (message.length() != 0 && message.contains("DTE.")) {
 
                         String[] messageSplitted = message.split(":");
 
                         if (messageSplitted[0].equals("DTE.tresh")) {
-                            model.setThresholdTemperature(Integer.parseInt(messageSplitted[1]));
+                            this.model.setThresholdTemperature(Integer.parseInt(messageSplitted[1]));
                         } else if (messageSplitted[0].equals("DTE.temp")) {
-                            model.setCurrentTemperature(Integer.parseInt(messageSplitted[1]));
+                            this.model.setCurrentTemperature(Integer.parseInt(messageSplitted[1]));
                         }
 
                     }
