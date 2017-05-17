@@ -58,10 +58,10 @@ Create a PCB card with a PIC getting an analog input and defining the state of s
 ![GPL3](https://camo.githubusercontent.com/3eb103d4afbd5bb2bbdf3d03e0e23e05ef44190f/687474703a2f2f7777772e676e752e6f72672f67726170686963732f67706c76332d3132377835312e706e67)
 
 Copyright 2017
-- **Chris Van Waesberghe** ([contact@chris.be](mailto:contact@chrisv.be)) - JAVA
-- **Nathan Dolinski** ([n.dolinski@students.ephec.be](n.dolinski@students.ephec.be)) - PROTEUS / EAGLE
-- **Mathieu Rousseau** ([m.rousseau@students.ephec.be](m.rousseau@students.ephec.be)) - PROTEUS / EAGLE / CCS
-- **Amélie Courtin** ([a.courtin@students.ephec.be](a.courtin@students.ephec.be)) - WELDS / JAVA
+- [**Chris Van Waesberghe**](mailto:contact@chrisv.be) - JAVA
+- [**Nathan Dolinski**](mailto:n.dolinski@students.ephec.be) - PROTEUS / EAGLE
+- [**Mathieu Rousseau**](mailto:m.rousseau@students.ephec.be) - PROTEUS / EAGLE / CCS
+- [**Amélie Courtin**](mailto:a.courtin@students.ephec.be) - WELDS / JAVA
 
 The DTE Java Interface (and other components of the project) are free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. The DTE Java Interface is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
