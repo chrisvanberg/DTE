@@ -31,7 +31,7 @@ ___
     1. Start the PROTEUS simulation
 1. Test the simulation
     1. You can change the threshold temperature on the JAVA interface
-    1. You can change the current temperature on PROTEUS by clicking on the + / - near the temperature probe
+    1. You can change the current temperature on PROTEUS by clicking on the `+ / -` near the temperature probe
     1. The green led indicate that everything is fine
     1. The blinking red led indicate that the current temperature is beyond the threshold and an alert is triggered
 
