@@ -14,11 +14,14 @@ ___
 **Digital Temperature Equipment** was a school project (2016/17). It may never be updated in the future. Use it a your own risk. However feel free to submit a pull request !
 
 ## How to launch the simulation
+1. Prerequisites
+    1. The latest [JAVA runtime](https://www.java.com/fr/download/) update installed
+    1. [Proteus 8](https://www.labcenter.com/)
 1. Preset
     1. Clone or download the project
     1. Build or [download](https://github.com/KeydownR/DTE/releases) the binaries of the DTE JAVA interface
     1. Download and install the [**RXTX library**](http://fizzed.com/oss/rxtx-for-java) on your computer
-    1. Create a COM virtual pair (Ex. COM1<->COM2) using for example [**VSPE** (Windows, mac version is outdated..)](http://www.lawyerment.com/downloads/Programming/Debugging_and_Tracing/Review_17462_index.htm)
+    1. Create a COM virtual pair (Ex. COM1<->COM2) using for example [**VSPE** (Windows)](http://www.lawyerment.com/downloads/Programming/Debugging_and_Tracing/Review_17462_index.htm)
 1. Launching the simulation
     1. Launch the DTE Java interface
     1. Connect to one of the COM port that you have paired earlier
