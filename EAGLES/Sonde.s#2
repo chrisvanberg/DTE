@@ -970,7 +970,7 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 Based on the previous libraries:
 &lt;ul&gt;
 &lt;li&gt;r.lbr
-&lt;li&gt;cap.lbr
+&lt;li&gt;cap.lbr 
 &lt;li&gt;cap-fe.lbr
 &lt;li&gt;captant.lbr
 &lt;li&gt;polcap.lbr
@@ -8883,8 +8883,10 @@ Based on the following sources:
 <wire x1="190.5" y1="147.32" x2="195.58" y2="147.32" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="GND" class="0">
+<net name="N$1" class="0">
 <segment>
+<pinref part="U1" gate="P1" pin="VSS@1"/>
+<pinref part="U1" gate="P1" pin="VSS@2"/>
 <pinref part="JP1" gate="A" pin="1"/>
 <wire x1="287.02" y1="0" x2="248.92" y2="0" width="0.1524" layer="91"/>
 <wire x1="248.92" y1="0" x2="195.58" y2="0" width="0.1524" layer="91"/>
@@ -8923,8 +8925,8 @@ Based on the following sources:
 <wire x1="287.02" y1="0" x2="299.72" y2="0" width="0.1524" layer="91"/>
 <junction x="287.02" y="0"/>
 <pinref part="IC1" gate="P" pin="GND"/>
-<pinref part="C6" gate="G$1" pin="2"/>
 <wire x1="144.78" y1="162.56" x2="147.32" y2="162.56" width="0.1524" layer="91"/>
+<pinref part="C6" gate="G$1" pin="2"/>
 <wire x1="147.32" y1="162.56" x2="200.66" y2="162.56" width="0.1524" layer="91"/>
 <wire x1="198.12" y1="147.32" x2="200.66" y2="147.32" width="0.1524" layer="91"/>
 <wire x1="200.66" y1="147.32" x2="200.66" y2="162.56" width="0.1524" layer="91"/>
@@ -8962,16 +8964,13 @@ Based on the following sources:
 <wire x1="299.72" y1="0" x2="299.72" y2="81.28" width="0.1524" layer="91"/>
 <junction x="299.72" y="0"/>
 <junction x="299.72" y="81.28"/>
+<wire x1="144.78" y1="104.14" x2="147.32" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="147.32" y1="104.14" x2="147.32" y2="162.56" width="0.1524" layer="91"/>
+<junction x="147.32" y="162.56"/>
 <pinref part="X3" gate="G$1" pin="5"/>
 <wire x1="220.636603125" y1="145.44083125" x2="226.06" y2="145.44083125" width="0.1524" layer="91"/>
 <wire x1="226.06" y1="145.44083125" x2="226.06" y2="162.56" width="0.1524" layer="91"/>
 <junction x="226.06" y="162.56"/>
-<pinref part="U1" gate="P1" pin="VSS@2"/>
-<wire x1="147.32" y1="104.14" x2="147.32" y2="162.56" width="0.1524" layer="91"/>
-<junction x="147.32" y="162.56"/>
-<pinref part="U1" gate="P1" pin="VSS@1"/>
-<wire x1="147.32" y1="104.14" x2="144.78" y2="104.14" width="0.1524" layer="91"/>
-<junction x="147.32" y="104.14"/>
 </segment>
 </net>
 <net name="N$3" class="0">
