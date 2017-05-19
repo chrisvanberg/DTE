@@ -13,46 +13,25 @@ ___
 ## Warning
 **Digital Temperature Equipment** was a school project (2016/17). It may never be updated in the future. Use it a your own risk. However feel free to submit a pull request !
 
-## Finality of the project
-* Elaborate a working methodology and plan the activities by realizing a project based on **interfacing a computer system with an external environment**
-* Analyze a given technical situation and **propose solutions that take account of the constraints**
-* **Implement theoretical knowledge** acquired in first year and second year electronics courses.
-* Approach the design and **manufacturing process of an electronic product**
-* Carry out the work requested on the basis of the specifications
+## How to launch the simulation
+1. Preset
+    1. Clone or download the project
+    1. Build or [download](https://github.com/KeydownR/DTE/releases) the binaries of the DTE JAVA interface
+    1. Download and install the [**RXTX library**](http://fizzed.com/oss/rxtx-for-java) on your computer
+    1. Create a COM virtual pair (Ex. COM1<->COM2) using for example [**VSPE** (Windows, mac version is outdated..)](http://www.lawyerment.com/downloads/Programming/Debugging_and_Tracing/Review_17462_index.htm)
+1. Launching the simulation
+    1. Launch the DTE Java interface
+    1. Connect to one of the COM port that you have paired earlier
+    1. Open the PROTEUS project
+    1. Be sure that the PIC source code is `sonde2.hex` (Double clic on the PIC and check the value)
+    1. Click on the RS232 connector and selec the other COM port that you have paired earlier
+    1. Start the PROTEUS simulation
+1. Test the simulation
+    1. You can change the threshold temperature on the JAVA interface
+    1. You can change the current temperature on PROTEUS by clicking on the + / - near the temperature probe
+    1. The green led indicate that everything is fine
+    1. The blinking red led indicate that the current temperature is beyond the threshold and an alert is triggered
 
-## Instructions & Objectives
-* **Establish a working plan** that breaks down the project into main stages and, if necessary, in sub-steps, with an estimate of the resources needed (material and human), the time of implementation and the date of completion
-* **Show the progress of the project** at the beginning of March with a written report (from 2 to 3 pages). The report must be submitted no later than March 6, 2017. Students must also suggest the suggested paths for further development of the project.
-* **Present and defend this project orally** in front of Mr Bouterfa and Mr Dewulf the last week of the semester course.
-
-## Specifications
-### Product to design
-Create a PCB card with a PIC getting an analog input and defining the state of several digital outputs, which also includes the probe and on the other hand a temperature display alongside an alarm information.
-
-### Hardware Specifications
-* PIC : **18F458**
-  * Programmable via the RS232 interface
-* Temperature sensor : **LM35**
-  * The sensor must operate within the temperature range of 0 °C to 100 °C.
-  * The use of the sensor for negative temperatures can be implemented but is not mandatory.
-* Display of the temperature: it must be done on two 7-segment displays with common cathodes. These displays are located on the board alongside the probe.
-* Alert: It is indicated by a red LED flashing.
-* When no alert is in progress, a green LED must remain permanently on.
-
-### Software specifications
-* **JAVA Interface** :
-  * Must display whether an alert is in progress or not.
-  * Doit envoyer au PIC la valeur de la nouvelle température de seuil à laquelle l'alerte sera déclenchée.
-  * It communicates with the PIC via the RS232 port of the PC.
-    * The API "[RxTx](http://users.frii.com/jarvi/rxtx/)" will be used to control the RS232 port in java ([WIKI](http://rxtx.qbang.org/wiki/index.php/Main_Page))
-
-### Softwares et librairies
-  * **Simulateur électronique** : Proteus ISIS
-  * **Dessin électronique** : Cadsoft Eagle
-  * **Compilateur C pour PIC** : CCS PCWH Compiler ou autre (MPLAB® X IDE)
-  * **Java** : Eclipse / Netbeans / IntelliJ IDEA or other
-  * **Simulation de la liaison série** : Virtual Serial Ports Emulator
-  * **Librairie** : "[RxTx](http://users.frii.com/jarvi/rxtx/)" to manage communication on COM port in java
 
 ## Licence
 ![GPL3](https://camo.githubusercontent.com/3eb103d4afbd5bb2bbdf3d03e0e23e05ef44190f/687474703a2f2f7777772e676e752e6f72672f67726170686963732f67706c76332d3132377835312e706e67)
