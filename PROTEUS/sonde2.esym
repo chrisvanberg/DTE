@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 D G "__PCH__" 0 0 ""5.065d""
 D G "__DEVICE__" 0 0 ""
 D G "__DATE__" 0 0 ""15-mai-17""
 D G "__TIME__" 0 0 ""22:59:57""
 D G "_UNICODE" 0 0 ""?""
 D G "__EVAL" 0 0 ""?"" "Standard Header file for the PIC18F458 device ////////////////"
+=======
+F N "MAIN" 0 64 ""
+D G "__PCH__" 0 106 ""5.065d""
+D G "__DEVICE__" 0 106 "458"
+D G "__DATE__" 0 106 ""15-mai-17""
+D G "__TIME__" 0 106 ""21:10:06""
+D G "_UNICODE" 0 106 ""?""
+D G "__EVAL" 0 106 ""?"" "Standard Header file for the PIC18F458 device ////////////////"
+>>>>>>> master
 c L "set_tris_a" 2 3 6 "FUNCTION"
 f N "set_tris_a" 2 40 ""
 v L "value" 2 40 "int8" `54 

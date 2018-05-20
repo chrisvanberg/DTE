@@ -116,6 +116,7 @@ ROM Allocation:
 0136  StrtolGO
 
 Project Directory:
+<<<<<<< HEAD
     C:\Users\Mathieu\Documents\Lab\DTE\PROTEUS\
 
 Project Files:
@@ -130,6 +131,22 @@ Project Files:
     ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\LCD.c [22-févr.-16 09:05  CRC=D1A6378A]
 
 Source signature=D1EFE0E2
+=======
+    C:\Users\Mathieu\Desktop\Electro\PROTEUS\
+
+Project Files:
+    sonde2.c                                                [15-mai-17 21:10  CRC=925C5F37]
+    sonde2.h                                                [12-mai-17 15:43  CRC=D872A938]
+    ..\..\..\..\..\Program Files (x86)\PICC\Devices\18F458.h [21-nov.-16 15:45  CRC=8BC8FD78]
+    ..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h  [22-sept.-16 08:36  CRC=9CF8C837]
+    ..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h [26-mars-15 12:34  CRC=C4814297]
+    ..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h [05-sept.-14 11:47  CRC=897CEC6C]
+    ..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h [03-janv.-08 14:55  CRC=2D1F019F]
+    ..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h [29-juin-16 09:34  CRC=7E9CC16B]
+    ..\..\..\..\..\Program Files (x86)\PICC\Drivers\LCD.c   [22-févr.-16 09:05  CRC=D1A6378A]
+
+Source signature=30972F3F
+>>>>>>> master
 Program memory checksum=0000
 Program memory CRC=0000
 Hex file CRC=AEAC

@@ -15,13 +15,13 @@ Lines Stmts  %   Files
 ----- ----- ---  -----
   107    38   5  sonde2.c
     6     0   0  sonde2.h
-  785     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F458.h
- 2227   258  35  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
-  435     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
-   32     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h
-   28     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
- 1352   359  49  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
-  456    84  11  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\LCD.c
+  785     0   0  ..\..\..\..\..\Program Files (x86)\PICC\Devices\18F458.h
+ 2227   258  35  ..\..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
+  435     0   0  ..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
+   32     0   0  ..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h
+   28     0   0  ..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
+ 1352   359  49  ..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
+  456    84  11  ..\..\..\..\..\Program Files (x86)\PICC\Drivers\LCD.c
 ----- -----
  5428   739 Total
 
@@ -58,10 +58,7 @@ Program metrics:
 
  Segment     Used  Free
 -----------  ----  ----
-00000-00002     4  0  
-00004-00006     0  4  
-00008-000AC   166  0  
-000AE-07FFE  1586  31008  
-
-
-
+00000-00002     4  0
+00004-00006     0  4
+00008-000AC   166  0
+000AE-07FFE  1586  31008

@@ -1,4 +1,5 @@
-dte.javainterface
-dte.javainterface.controller
-dte.javainterface.model
-dte.javainterface.view
+be.chrisv.dte
+be.chrisv.dte.controller
+be.chrisv.dte.exceptions
+be.chrisv.dte.model
+be.chrisv.dte.view

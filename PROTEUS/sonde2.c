@@ -12,18 +12,18 @@
 
 int treshld = 15;
 
-#int_rda 
-void isr() { 
-   char treshstr[10];
-    
-   disable_interrupts(INT_RDA);
+#int_rda
+void isr() {
+    char treshstr[10];
 
-   // Read string from RS232
-   gets(treshstr);
-   
-   // convert treshstr in int 
-   treshld = atoi(treshstr);
-} 
+    disable_interrupts(INT_RDA);
+
+    // Read string from RS232
+    gets(treshstr);
+
+    // convert treshstr in int
+    treshld = atoi(treshstr);
+}
 
 int simpleBCDConverter(value) {
    // Shift tens from 4 bits to the left
@@ -66,17 +66,17 @@ void checkLed(int temp, int treshld) {
 void main()
 {
    setup_adc_ports(AN0);
-   set_adc_channel(0); // A0 connecté à l'entrée analogique
+   set_adc_channel(0); // A0 connectï¿½ ï¿½ l'entrï¿½e analogique
    setup_adc(ADC_CLOCK_INTERNAL);
    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1|RTCC_8_BIT); // 51,2 us overflow
    setup_timer_1(T1_INTERNAL|T1_DIV_BY_1); // 13,1 ms overflow
    setup_low_volt_detect(FALSE);
    enable_interrupts(GLOBAL);
-   
-   
+
+
    int lastTemperature = -1000;
    int currentTemperature;
-   
+
    // only sends treshold at start
    printf("DTE.tresh:%d\r\n", treshld);
 
@@ -86,17 +86,17 @@ void main()
       enable_interrupts(INT_RDA);
       //delay_ms(10);
       // Read the value from A/N converter (10bits [0 => 1023])
-      // And convert it to a range from 0 to 100 (°C)
+      // And convert it to a range from 0 to 100 (ï¿½C)
       // 0.48 => (5 / 1023) * 100
       currentTemperature = read_adc() * CONV_CST;
-      
+
       // Check temp level
       checkLed(currentTemperature, treshld);
 
       // Convert bits to BCD
       // And show temp on 7 segment displays
       bitsToBCD(currentTemperature);
-      
+
       // sends the temperature to JAVA interface when change
       if (currentTemperature != lastTemperature) {
          lastTemperature = currentTemperature;
