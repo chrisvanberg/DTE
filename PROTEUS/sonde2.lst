@@ -1,8 +1,16 @@
+<<<<<<< HEAD
+CCS PCH C Compiler, Version 5.065d, 1               15-mai-17 22:59
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+               Filename:   C:\Users\Mathieu\Documents\Lab\DTE\PROTEUS\sonde2.lst
+=======
 CCS PCH C Compiler, Version 5.065d, 1               15-mai-17 21:10
 Compiler operating in Evaluation Mode
 To obtain a fully enabled compiler visit www.ccsinfo.com/products
 
                Filename:   C:\Users\Mathieu\Desktop\Electro\PROTEUS\sonde2.lst
+>>>>>>> master
 
                ROM used:   1756 bytes (5%)
                            Largest free fragment is 31008
@@ -5667,6 +5675,15 @@ To obtain a fully enabled compiler visit www.ccsinfo.com/products
 ....................  
 .................... #int_rda  
 .................... void isr() {  
+<<<<<<< HEAD
+....................    char treshstr[10]; 
+....................      
+....................    disable_interrupts(INT_RDA); 
+0286:  BCF    F9D.5
+....................  
+....................    // Read string from RS232 
+....................    gets(treshstr); 
+=======
 ....................     char treshstr[10]; 
 ....................      
 ....................     disable_interrupts(INT_RDA); 
@@ -5674,6 +5691,7 @@ To obtain a fully enabled compiler visit www.ccsinfo.com/products
 ....................  
 ....................     // Read string from RS232 
 ....................     gets(treshstr);  
+>>>>>>> master
 0288:  CLRF   FEA
 028A:  MOVLW  2F
 028C:  MOVWF  FE9
@@ -5685,9 +5703,15 @@ To obtain a fully enabled compiler visit www.ccsinfo.com/products
 029A:  SUBWF  FEF,W
 029C:  BNZ   0290
 029E:  CLRF   FEC
+<<<<<<< HEAD
+....................     
+....................    // convert treshstr in int  
+....................    treshld = atoi(treshstr); 
+=======
 ....................      
 ....................     // convert treshstr in int  
 ....................     treshld = atoi(treshstr); 
+>>>>>>> master
 02A0:  CLRF   3A
 02A2:  MOVLW  2F
 02A4:  MOVWF  39

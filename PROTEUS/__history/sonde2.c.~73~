@@ -1,29 +1,14 @@
 #include <sonde2.h>
 #include <math.h>
-#include <string.h>
-#include <stdlib.h>
+#include <string.h>
 #include <LCD.c>
 
 #define CONV_CST 0.48875855327
+#define TRESHOLD 25
 #define TENS_DISPLAY PIN_E0
 #define UNITY_DISPLAY PIN_E1
 #define GREEN_LED PIN_C0
 #define RED_LED PIN_C1
-
-int treshld = 15;
-
-#int_rda
-void isr() {
-    char treshstr[10];
-
-    disable_interrupts(INT_RDA);
-
-    // Read string from RS232
-    gets(treshstr);
-
-    // convert treshstr in int
-    treshld = atoi(treshstr);
-}
 
 int simpleBCDConverter(value) {
    // Shift tens from 4 bits to the left
@@ -69,38 +54,39 @@ void main()
    set_adc_channel(0); // A0 connectï¿½ ï¿½ l'entrï¿½e analogique
    setup_adc(ADC_CLOCK_INTERNAL);
    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1|RTCC_8_BIT); // 51,2 us overflow
-   setup_timer_1(T1_INTERNAL|T1_DIV_BY_1); // 13,1 ms overflow
+   setup_timer_1(T1_INTERNAL|T1_DIV_BY_1); //13,1 ms overflow
    setup_low_volt_detect(FALSE);
-   enable_interrupts(GLOBAL);
 
-
-   int lastTemperature = -1000;
-   int currentTemperature;
-
+   int temperature;
+   int treshld;
+   char *treshstr;
+   char delimiter[] = ":";
+   
    // only sends treshold at start
-   printf("DTE.tresh:%d\r\n", treshld);
+   printf("DTE.tresh:%d\n", TRESHOLD);
 
    delay_ms(10);
 
    while(TRUE) {
-      enable_interrupts(INT_RDA);
       //delay_ms(10);
       // Read the value from A/N converter (10bits [0 => 1023])
-      // And convert it to a range from 0 to 100 (ï¿½C)
+      // And convert it to a range from 0 to 100 (°C)
       // 0.48 => (5 / 1023) * 100
-      currentTemperature = read_adc() * CONV_CST;
+      temperature = read_adc() * CONV_CST;
+      // sends the temperature to JAVA interface forever
+      printf("DTE.temp:%d\n", temperature);
+
+      // receives treshold from JAVA interface
+      gets(treshstr); // read string from rs232 (STDIN)
+      strtok(treshld, delimiter); // first part (DTE.tresh)
+      treshld = atoi(strtok(treshstr, delimiter)); // second part + parse int (ex: 25)
 
       // Check temp level
-      checkLed(currentTemperature, treshld);
+      checkLed(temperature, treshld);
 
       // Convert bits to BCD
       // And show temp on 7 segment displays
-      bitsToBCD(currentTemperature);
-
-      // sends the temperature to JAVA interface when change
-      if (currentTemperature != lastTemperature) {
-         lastTemperature = currentTemperature;
-         printf("DTE.temp:%d\r\n", currentTemperature);
-      }
+      bitsToBCD(temperature);
    }
+
 }

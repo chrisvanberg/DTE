@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+D G "__PCH__" 0 0 ""5.065d""
+D G "__DEVICE__" 0 0 ""
+D G "__DATE__" 0 0 ""15-mai-17""
+D G "__TIME__" 0 0 ""22:59:57""
+D G "_UNICODE" 0 0 ""?""
+D G "__EVAL" 0 0 ""?"" "Standard Header file for the PIC18F458 device ////////////////"
+=======
 F N "MAIN" 0 64 ""
 D G "__PCH__" 0 106 ""5.065d""
 D G "__DEVICE__" 0 106 "458"
@@ -5,6 +13,7 @@ D G "__DATE__" 0 106 ""15-mai-17""
 D G "__TIME__" 0 106 ""21:10:06""
 D G "_UNICODE" 0 106 ""?""
 D G "__EVAL" 0 106 ""?"" "Standard Header file for the PIC18F458 device ////////////////"
+>>>>>>> master
 c L "set_tris_a" 2 3 6 "FUNCTION"
 f N "set_tris_a" 2 40 ""
 v L "value" 2 40 "int8" `54 
@@ -467,9 +476,9 @@ f N "read_adc" 2 463 ""
 f G "read_adc" 2 463 "int16()" `216 
 f N "read_adc" 2 464 ""
 v L "mode" 2 464 "int8" `217 
-f G "read_adc" 2 464 "int16(int8 mode,int8 setting)" `216 
+f G "read_adc" 2 464 "int16(int8 mode)" `216 
 f N "adc_done" 2 465 ""
-f B "adc_done" 2 465 "int8(int8 mode,int8 setting)" `216  "Constants used for SETUP_ADC() are:"
+f B "adc_done" 2 465 "int8(int8 mode)" `216  "Constants used for SETUP_ADC() are:"
 d G "ADC_OFF" 2 467 "0" "ADC Off"
 d G "ADC_CLOCK_DIV_2" 2 468 "0x10000"
 d G "ADC_CLOCK_DIV_4" 2 469 "0x4000"
@@ -824,9 +833,9 @@ f B "i2c_init" 2 616 "void(int8 stream,int32 baud)" `438  "#use spi() Prototypes
 f N "spi_xfer" 2 619 ""
 f B "spi_xfer" 2 619 "int8()" `441 
 f N "spi_xfer" 2 620 ""
-f G "spi_xfer" 2 620 "int16(int8 data)" `442 
+f G "spi_xfer" 2 620 "int16()" `442 
 f N "spi_xfer" 2 621 ""
-f G "spi_xfer" 2 621 "int32(int8 data)" `442 
+f G "spi_xfer" 2 621 "int32()" `442 
 f N "spi_xfer" 2 622 ""
 v L "data" 2 622 "int8" `443 
 f B "spi_xfer" 2 622 "int8(int8 data)" `442 
@@ -906,18 +915,18 @@ f B "spi_prewrite" 2 641 "void(int8 ,int32 data)" `495
 f N "spi_xfer_in" 2 642 ""
 f B "spi_xfer_in" 2 642 "int8()" `498 
 f N "spi_xfer_in" 2 643 ""
-f G "spi_xfer_in" 2 643 "int16(int8 bits)" `499 
+f G "spi_xfer_in" 2 643 "int16()" `499 
 f N "spi_xfer_in" 2 644 ""
-f G "spi_xfer_in" 2 644 "int32(int8 bits)" `499 
+f G "spi_xfer_in" 2 644 "int32()" `499 
 f N "spi_xfer_in" 2 645 ""
 v L "bits" 2 645 "int8" `500 
 f B "spi_xfer_in" 2 645 "int8(int8 bits)" `499 
 f N "spi_xfer_in" 2 646 ""
 v L "bits" 2 646 "int8" `502 
-f G "spi_xfer_in" 2 646 "int16(int8 bits,int8 bits)" `501 
+f G "spi_xfer_in" 2 646 "int16(int8 bits)" `501 
 f N "spi_xfer_in" 2 647 ""
 v L "bits" 2 647 "int8" `502 
-f G "spi_xfer_in" 2 647 "int32(int8 bits,int8 bits)" `501 
+f G "spi_xfer_in" 2 647 "int32(int8 bits)" `501 
 f N "spi_xfer_in" 2 648 ""
 v L "stream" 2 648 "int8" `502 
 v L "bits" 2 648 "int8" `503 
@@ -925,15 +934,15 @@ f B "spi_xfer_in" 2 648 "int8(int8 stream,int8 bits)" `501
 f N "spi_xfer_in" 2 649 ""
 v L "stream" 2 649 "int8" `502 
 v L "bits" 2 649 "int8" `506 
-f G "spi_xfer_in" 2 649 "int16(int8 stream,int8 bits,int8 task)" `504 
+f G "spi_xfer_in" 2 649 "int16(int8 stream,int8 bits)" `504 
 f N "spi_xfer_in" 2 650 ""
 v L "stream" 2 650 "int8" `502 
 v L "bits" 2 650 "int8" `506 
-f G "spi_xfer_in" 2 650 "int32(int8 stream,int8 bits,int8 task)" `504  "#use rtos() Prototypes:"
+f G "spi_xfer_in" 2 650 "int32(int8 stream,int8 bits)" `504  "#use rtos() Prototypes:"
 f N "rtos_run" 2 653 ""
-f B "rtos_run" 2 653 "void(int8 stream,int8 bits,int8 task)" `504 
+f B "rtos_run" 2 653 "void(int8 stream,int8 bits)" `504 
 f N "rtos_yield" 2 654 ""
-f B "rtos_yield" 2 654 "void(int8 bits,int8 task)" `505 
+f B "rtos_yield" 2 654 "void(int8 bits)" `505 
 f N "rtos_enable" 2 655 ""
 v L "task" 2 655 "int8" `507 
 f B "rtos_enable" 2 655 "void(int8 task)" `506 
@@ -969,9 +978,9 @@ f B "rtos_stats" 2 665 "void(int8 task,*int8 stat)" `524  "#use timer() Prototyp
 f N "get_ticks" 2 668 ""
 f B "get_ticks" 2 668 "int8()" `527 
 f N "get_ticks" 2 669 ""
-f G "get_ticks" 2 669 "int16(int8 stream)" `528 
+f G "get_ticks" 2 669 "int16()" `528 
 f N "get_ticks" 2 670 ""
-f G "get_ticks" 2 670 "int32(int8 stream)" `528 
+f G "get_ticks" 2 670 "int32()" `528 
 f N "get_ticks" 2 671 ""
 v L "stream" 2 671 "int8" `529 
 f B "get_ticks" 2 671 "int8(int8 stream)" `528 
